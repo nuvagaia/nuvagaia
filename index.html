@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUVAGAIA - Descubre las Tres Civilizaciones y el Misterio de los Tejedores de Estrellas</title>
+    <meta name="description" content="Embárcate en un viaje a través de NUVAGAIA y descubre las futuras civilizaciones de la humanidad: Solarpunk, Hydropunk, Nanopunk. Una experiencia de scrollytelling inmersiva en un mundo sorprendente.">
+    <meta name="keywords" content="NUVAGAIA, IA, ciencia ficción, storytelling, civilizaciones futuras, scrollytelling, Solarpunk, Hydropunk, Nanopunk, Tejedores de Estrellas, horror cósmico, ópera espacial, futuro post-apocalíptico">
+    <meta name="author" content="Gerard Bisbal Brucart">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --color-primario: #b3d338;
+            --color-secundario: #FFD700;
+            --fondo-oscuro: #0c142c;
+            --texto-claro: #f0f8ff;
+            --texto-oscuro: #212529;
+            --fuente-principal: 'Exo 2', sans-serif;
+            --fuente-descripcion: 'Inter', sans-serif;
+            --color-solarpunk-button: #b3d338;
+            --color-hydropunk-button: #9ed9f1;
+            --color-nanopunk-button: #f58228;
+            --color-tejedores-button: #76a6ff;
+        }
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--fuente-principal);
+            background-color: var(--fondo-oscuro);
+            color: var(--texto-claro);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+        }
+        .seccion-fondo {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 0;
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+        .seccion-fondo.hero {
+            background-image: url('https://i.postimg.cc/LXsnv9Dy/Hero-BGFake.jpg');
+        }
+        .seccion-fondo.solarpunk {
+            background-image: url('https://i.postimg.cc/85Td3ChM/Solarpunk-Section-BGFake.jpg');
+        }
+        .seccion-fondo.hydropunk {
+            background-image: url('https://i.postimg.cc/Kj6jZn2V/Hydropunk-Section-BGFake.jpg');
+        }
+        .seccion-fondo.nanopunk {
+            background-image: url('https://i.postimg.cc/Pf9M7xcv/Nanopunk-Section-BGFake.jpg');
+        }
+        .seccion-fondo.tejedores {
+            background-image: url('https://i.postimg.cc/qvXXgG72/Tejedores-Section-BGFake.jpg');
+        }
+        .seccion-fondo.intersticial {
+            background-image: url('https://i.postimg.cc/tJp9Ryv3/Transicion-Section-BG2-Fake.jpg');
+        }
+        h1 { font-size: clamp(3rem, 10vw, 7rem); font-weight: 600; text-transform: uppercase; line-height: 1; margin-bottom: 20px;}
+        h2 { font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 600; margin-bottom: 40px; text-transform: uppercase; }
+        h3 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 600; margin-bottom: 15px; }
+        p { font-size: clamp(1rem, 2.5vw, 1.1rem); line-height: 1.5; margin-bottom: 12px; }
+        .fade-in, .fade-in-up {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up { transform: translateY(40px); }
+        .visible { opacity: 1; transform: translateY(0); }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        @keyframes text-glow-cycle {
+            0%, 100% { text-shadow: 0 0 15px #b3d338, 0 0 5px rgba(255,255,255,0.7); }
+            25% { text-shadow: 0 0 15px #9ed9f1, 0 0 5px rgba(255,255,255,0.7); }
+            50% { text-shadow: 0 0 15px #f58228, 0 0 5px rgba(255,255,255,0.7); }
+            75% { text-shadow: 0 0 15px #76a6ff, 0 0 5px rgba(255,255,255,0.7); }
+        }
+        @keyframes button-glow-cycle {
+            0%, 100% {
+                border-top-color: #d2ee71;
+                border-right-color: #b3d338;
+                border-bottom-color: #b3d338;
+                border-left-color: #b3d338;
+                box-shadow: 0 0 12px #b3d338, 0 0 20px rgba(179,211,56,0.5);
+            }
+            25% {
+                border-top-color: #c2e5f6;
+                border-right-color: #9ed9f1;
+                border-bottom-color: #9ed9f1;
+                border-left-color: #9ed9f1;
+                box-shadow: 0 0 12px #9ed9f1, 0 0 20px rgba(158,217,241,0.5);
+            }
+            50% {
+                border-top-color: #f89c52;
+                border-right-color: #f58228;
+                border-bottom-color: #f58228;
+                border-left-color: #f58228;
+                box-shadow: 0 0 12px #f58228, 0 0 20px rgba(245,130,40,0.5);
+            }
+            75% {
+                border-top-color: #93c4ff;
+                border-right-color: #76a6ff;
+                border-bottom-color: #76a6ff;
+                border-left-color: #76a6ff;
+                box-shadow: 0 0 12px #76a6ff, 0 0 20px rgba(156,192,230,0.5);
+            }
+        }
+        @keyframes button-text-glow-cycle {
+            0%, 100% { text-shadow: 0 0 12px #b3d338, 0 0 3px var(--texto-claro); }
+            25% { text-shadow: 0 0 12px #9ed9f1, 0 0 3px var(--texto-claro); }
+            50% { text-shadow: 0 0 12px #f58228, 0 0 3px var(--texto-claro); }
+            75% { text-shadow: 0 0 12px #76a6ff, 0 0 3px var(--texto-claro); }
+        }
+        .navegacion-principal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(12, 20, 44, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 242, 234, 0.2);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        .navegacion-principal .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .navegacion-principal a {
+            color: var(--texto-claro);
+            text-decoration: none;
+            margin: 5px 15px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: color 0.3s ease, transform 0.2s ease, text-shadow 0.3s ease;
+            position: relative;
+        }
+        .navegacion-principal a:hover,
+        .navegacion-principal a:focus {
+            color: var(--texto-claro);
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--texto-claro), 0 0 20px var(--texto-claro);
+            outline: none;
+        }
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(12, 20, 44, 0.8);
+            backdrop-filter: blur(5px);
+            border: 2px solid var(--texto-claro);
+            border-radius: 8px;
+            color: var(--texto-claro);
+            font-size: 1.35rem;
+            padding: 8px 12px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(240, 248, 255, 0.5);
+        }
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            color: var(--color-secundario);
+        }
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(12, 20, 44, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1002;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .mobile-menu-overlay.active {
+            display: flex;
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .mobile-menu-overlay nav a {
+            color: var(--texto-claro);
+            text-decoration: none;
+            font-size: 1.8rem;
+            padding: 15px 0;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .mobile-menu-overlay nav a:hover {
+            background-color: rgba(179,211,56,0.2);
+            color: var(--color-primario);
+        }
+        .close-menu {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--texto-claro);
+            font-size: 2.2rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .close-menu:hover {
+            color: var(--color-secundario);
+        }
+        .hero .contenido-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        .hero h1, .hero p {
+            animation: text-glow-cycle 10s infinite alternate;
+        }
+        .hero p {
+            font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+            max-width: 700px;
+            margin: 20px 0 40px 0;
+            font-weight: 300;
+        }
+        .boton-cta {
+            background: transparent;
+            color: var(--texto-claro);
+            padding: 15px 40px;
+            font-family: var(--fuente-principal);
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 7px;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-style: solid;
+            border-width: 5px 1px 1px 1px;
+            animation: button-glow-cycle 10s infinite alternate, button-text-glow-cycle 10s infinite alternate;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 12px var(--color-primario);
+        }
+        .boton-cta:hover, .boton-cta:focus {
+            transform: scale(1.05) translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--fondo-oscuro);
+            text-shadow: none;
+            box-shadow: 0 0 25px rgba(255,255,255,0.7);
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: -290px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2.5rem;
+            animation: blink 1.5s infinite alternate;
+            z-index: 5;
+        }
+        .scroll-indicator i {
+            display: block;
+            text-shadow: 0 0 10px rgba(255,255,255,0.6);
+        }
+        .seccion-civilizacion { flex-direction: column; }
+        .tarjeta-civ {
+            background-color: rgba(12, 20, 44, 0.7);
+            border-style: solid;
+            border-width: 5px 1px 1px 1px;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            margin: 0 auto 50px auto;
+            backdrop-filter: blur(2px);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tarjeta-civ:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+        .tarjeta-civ h3 { 
+            margin-top: 3px;
+            margin-bottom: 3px;
+        }
+        #Solarpunk .tarjeta-civ {
+            border-top-color: #d2ee71;
+            border-right-color: #b3d338;
+            border-bottom-color: #b3d338;
+            border-left-color: #b3d338;
+        }
+        #Solarpunk h3 { 
+            color: var(--color-primario);
+            position: relative; 
+            display: inline-block; 
+            z-index: 1; 
+            overflow: visible; 
+        }
+        #Solarpunk .descripcion-civ { color: #f9da8c; }
+        #Hydropunk .tarjeta-civ { 
+            border-top-color: #c2e5f6;
+            border-right-color: #9ed9f1;
+            border-bottom-color: #9ed9f1;
+            border-left-color: #9ed9f1;
+        }
+        #Hydropunk h3 { color: #f04925; }
+        #Hydropunk .descripcion-civ { color: #9ed9f1; }
+        #Nanopunk .tarjeta-civ {
+            border-top-color: #f89c52;
+            border-right-color: var(--color-nanopunk-button);
+            border-bottom-color: var(--color-nanopunk-button);
+            border-left-color: var(--color-nanopunk-button);
+        }
+        #Nanopunk h3 { color: #9ad7d9; position: relative; }
+        #Nanopunk h3::before, #Nanopunk h3::after {
+            content: 'Nanopunk'; 
+            position: absolute; 
+            top: 0; 
+            left: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: hidden;
+            mix-blend-mode: hard-light; 
+        }
+        #Nanopunk h3::before { left: 1px; text-shadow: -1px 0 var(--color-secundario); animation: glitch-effect 3s infinite linear alternate-reverse; }
+        #Nanopunk h3::after { left: -1px; text-shadow: -1px 0 var(--color-primario); animation: glitch-effect 2s infinite linear alternate-reverse; }
+        @keyframes glitch-effect {
+            0% { clip: rect(40px, 9999px, 45px, 0); }
+            5% { clip: rect(10px, 9999px, 60px, 0); }
+            10% { clip: rect(38px, 9999px, 43px, 0); }
+            100% { clip: rect(28px, 9999px, 52px, 0); }
+        }
+        #Tejedores-de-Estrellas .tarjeta-civ {
+            border-top-color: #93c4ff;
+            border-right-color: #76a6ff;
+            border-bottom-color: #76a6ff;
+            border-left-color: #76a6ff;
+        }
+        #Tejedores-de-Estrellas h3 { 
+            color: #f8ead8; 
+            text-shadow: 0 0 8px #f47820, 0 0 12px #f47820; 
+            line-height: 1.2;
+        }
+        #Tejedores-de-Estrellas .descripcion-civ { color: #76a6ff; }
+        .tarjeta-civ img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            margin-bottom: 20px; 
+            border-radius: 8px;
+            display: block;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #ccc;
+        }
+        .tarjeta-civ .descripcion-civ {
+            font-family: var(--fuente-descripcion);
+            font-size: 1rem; 
+            line-height: 1.4;
+            margin: 10px 0 20px 0;
+            text-align: center;
+        }
+        #Nanopunk .descripcion-civ { 
+            color: var(--color-nanopunk-button);
+        }
+        .botones-tarjeta { 
+            margin-top: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px;
+        }
+        .boton-civ, .boton-lore {
+            display: block;
+            padding: 12px 25px;
+            text-decoration: none; 
+            font-weight: 700;
+            border-radius: 7px; 
+            transition: all 0.3s ease;
+            cursor: pointer; 
+            border-style: solid;
+            border-width: 5px 1px 1px 1px;
+            background-color: transparent;
+            text-align: center;
+        }
+        #Solarpunk .boton-civ { border-top-color: #d2ee71; border-right-color: #b3d338; border-bottom-color: #b3d338; border-left-color: #b3d338; color: #b3d338; }
+        #Solarpunk .boton-lore { border-top-color: #fbe4a9; border-right-color: #f9da8c; border-bottom-color: #f9da8c; border-left-color: #f9da8c; color: #f9da8c; }
+        #Solarpunk .boton-civ:hover, #Solarpunk .boton-civ:focus { background-color: #b3d338; color: var(--fondo-oscuro); box-shadow: 0 0 15px #b3d338; transform: translateY(-3px); }
+        #Solarpunk .boton-lore:hover, #Solarpunk .boton-lore:focus { background-color: #f9da8c; color: var(--fondo-oscuro); box-shadow: 0 0 15px #f9da8c; transform: translateY(-3px); }
+        #Hydropunk .boton-civ { border-top-color: #f46d4e; border-right-color: #f04925; border-bottom-color: #f04925; border-left-color: #f04925; color: #f04925; }
+        #Hydropunk .boton-lore { border-top-color: #c2e5f6; border-right-color: #9ed9f1; border-bottom-color: #9ed9f1; border-left-color: #9ed9f1; color: #9ed9f1; }
+        #Hydropunk .boton-civ:hover, #Hydropunk .boton-civ:focus { background-color: #f04925; color: var(--fondo-oscuro); box-shadow: 0 0 15px #f04925; transform: translateY(-3px); }
+        #Hydropunk .boton-lore:hover, #Hydropunk .boton-lore:focus { background-color: #9ed9f1; color: var(--fondo-oscuro); box-shadow: 0 0 15px #9ed9f1; transform: translateY(-3px); }
+        #Nanopunk .boton-civ { border-top-color: #bce4e6; border-right-color: #9ad7d9; border-bottom-color: #9ad7d9; border-left-color: #9ad7d9; color: #9ad7d9; }
+        #Nanopunk .boton-lore { border-top-color: #f89c52; border-right-color: var(--color-nanopunk-button); border-bottom-color: var(--color-nanopunk-button); border-left-color: var(--color-nanopunk-button); color: var(--color-nanopunk-button); }
+        #Nanopunk .boton-civ:hover, #Nanopunk .boton-civ:focus { background-color: #9ad7d9; color: var(--fondo-oscuro); box-shadow: 0 0 15px #9ad7d9; transform: translateY(-3px); }
+        #Nanopunk .boton-lore:hover, #Nanopunk .boton-lore:focus { background-color: var(--color-nanopunk-button); color: var(--fondo-oscuro); box-shadow: 0 0 15px var(--color-nanopunk-button); transform: translateY(-3px); }
+        #Tejedores-de-Estrellas .boton-civ { border-top-color: #fbf3ec; border-right-color: #f8ead8; border-bottom-color: #f8ead8; border-left-color: #f8ead8; color: #f8ead8; text-shadow: 0 0 8px #f47820; }
+        #Tejedores-de-Estrellas .boton-lore { border-top-color: #93c4ff; border-right-color: #76a6ff; border-bottom-color: #76a6ff; border-left-color: #76a6ff; color: #76a6ff; }
+        #Tejedores-de-Estrellas .boton-civ:hover, #Tejedores-de-Estrellas .boton-civ:focus { background-color: #f8ead8; color: #f47820; text-shadow: none; box-shadow: 0 0 15px #f8ead8; transform: translateY(-3px); }
+        #Tejedores-de-Estrellas .boton-lore:hover, #Tejedores-de-Estrellas .boton-lore:focus { background-color: #76a6ff; color: var(--fondo-oscuro); box-shadow: 0 0 15px #76a6ff; transform: translateY(-3px); }
+        .texto-intersticial { 
+            background-color: #0c142c;
+            background-image: url('https://i.postimg.cc/tJp9Ryv3/Transicion-Section-BG2-Fake.jpg');
+            padding: 150px 0; 
+            min-height: auto; 
+        }
+        .texto-intersticial p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+            font-weight: 400;
+            animation: text-glow-cycle 10s infinite alternate;
+            padding: 0 15px;
+        }
+        .contact-and-footer-wrapper {
+            background-color: #0c142c;
+            background-image: url('https://i.postimg.cc/tJp9Ryv3/Transicion-Section-BG2-Fake.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+        #suscripcion {
+            background-color: transparent;
+            background-image: none;
+            padding: 100px 0;
+            text-align: center;
+        }
+        #suscripcion h2 {
+            color: var(--texto-claro);
+            animation: text-glow-cycle 10s infinite alternate;
+            margin-bottom: 20px;
+        }
+        #suscripcion p {
+            font-family: var(--fuente-descripcion);
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+        }
+        .form-suscripcion {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .form-suscripcion input[type="email"] {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--texto-claro);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: var(--texto-claro);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--fuente-descripcion);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-suscripcion input[type="email"]:focus {
+            outline: none;
+            border-color: var(--texto-claro);
+            box-shadow: 0 0 15px var(--texto-claro);
+        }
+        .form-suscripcion button {
+            background: transparent;
+            color: var(--texto-claro);
+            padding: 15px 40px;
+            font-family: var(--fuente-principal);
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 7px;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-style: solid;
+            border-width: 5px 1px 1px 1px;
+            animation: button-glow-cycle 10s infinite alternate, button-text-glow-cycle 10s infinite alternate;
+            box-shadow: 0 0 12px var(--color-primario);
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+        .form-suscripcion button:hover {
+            transform: scale(1.05) translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--fondo-oscuro);
+            text-shadow: none;
+            box-shadow: 0 0 25px rgba(255,255,255,0.7);
+        }
+        .pie-pagina { 
+            padding: 80px 0; 
+            text-align: center; 
+            background-color: transparent;
+            background-image: none;
+            border-top: 1px solid rgba(0, 242, 234, 0.1);
+        }
+        .seccion-enlaces { margin-bottom: 60px; }
+        .seccion-enlaces h2 {
+            animation: text-glow-cycle 10s infinite alternate;
+            margin-bottom: 30px;
+        }
+        .botones-enlaces {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .botones-enlaces a {
+            color: var(--texto-claro); 
+            border-style: solid;
+            border-width: 5px 1px 1px 1px;
+            padding: 7px 20px;
+            margin: 5px; 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 150px;
+            text-align: center; 
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            border-radius: 7px; 
+            font-weight: 700;
+            background-color: transparent;
+            box-shadow: 0 0 10px rgba(179,211,56,0.3);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 1.05rem;
+        }
+        .botones-enlaces a i { 
+            margin-right: 8px;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+        .botones-enlaces a .icon-png { 
+            margin-right: 8px;
+            width: 1.2em;
+            height: 1.2em;
+            flex-shrink: 0;
+        }
+        .botones-enlaces a:nth-child(1) {
+            border-top-color: #d2ee71;
+            border-right-color: var(--color-solarpunk-button);
+            border-bottom-color: var(--color-solarpunk-button);
+            border-left-color: var(--color-solarpunk-button);
+            color: var(--color-solarpunk-button);
+            width: 250px;
+        }
+        .botones-enlaces a:nth-child(1):hover {
+            background-color: var(--color-solarpunk-button);
+            color: var(--fondo-oscuro);
+            box-shadow: 0 0 15px var(--color-solarpunk-button), 0 8px 20px rgba(179,211,56,0.4);
+            transform: translateY(-3px);
+        }
+        .botones-enlaces a:nth-child(2) {
+            border-top-color: #c2e5f6;
+            border-right-color: var(--color-hydropunk-button);
+            border-bottom-color: var(--color-hydropunk-button);
+            border-left-color: var(--color-hydropunk-button);
+            color: var(--color-hydropunk-button);
+            width: 220px;
+        }
+        .botones-enlaces a:nth-child(2):hover {
+            background-color: var(--color-hydropunk-button);
+            color: var(--fondo-oscuro);
+            box-shadow: 0 0 15px var(--color-hydropunk-button), 0 8px 20px rgba(158,217,241,0.4);
+            transform: translateY(-3px);
+        }
+        .botones-enlaces a:nth-child(3) {
+            border-top-color: #f89c52;
+            border-right-color: var(--color-nanopunk-button);
+            border-bottom-color: var(--color-nanopunk-button);
+            border-left-color: var(--color-nanopunk-button);
+            color: var(--color-nanopunk-button);
+            width: 280px;
+        }
+        .botones-enlaces a:nth-child(3):hover {
+            background-color: var(--color-nanopunk-button);
+            color: var(--fondo-oscuro);
+            box-shadow: 0 0 15px var(--color-nanopunk-button), 0 8px 20px rgba(245,130,40,0.4);
+            transform: translateY(-3px);
+        }
+        .enlaces-sociales {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .enlaces-sociales a { 
+            font-size: 2.2rem;
+            color: var(--texto-claro); 
+            transition: color 0.3s, transform 0.3s, text-shadow 0.3s ease;
+        }
+        .enlaces-sociales a:hover,
+        .enlaces-sociales a:focus {
+            color: var(--texto-claro);
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--texto-claro), 0 0 20px var(--texto-claro);
+            outline: none;
+        }
+        .pie-pagina small {
+            font-family: var(--fuente-descripcion);
+            font-size: 0.85rem;
+            display: block;
+            margin-top: 10px;
+        }
+        .modal-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: none; 
+            align-items: center; 
+            justify-content: center; 
+            z-index: 2000; 
+            opacity: 0; 
+            transition: opacity 0.4s ease; 
+        }
+        .modal-overlay.visible { display: flex; opacity: 1; }
+        .modal-contenido { 
+            background: var(--fondo-oscuro); 
+            border: 2px solid var(--color-primario);
+            padding: 40px;
+            border-radius: 8px;
+            width: 90%; 
+            max-width: 650px;
+            max-height: 85vh;
+            overflow-y: auto; 
+            position: relative; 
+            transform: scale(0.8); 
+            transition: transform 0.4s ease; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+        .modal-overlay.visible .modal-contenido { transform: scale(1); }
+        .modal-contenido h4 { 
+            font-size: 2rem; 
+            margin-bottom: 20px; 
+            color: var(--color-primario); 
+            text-shadow: 0 0 10px rgba(179,211,56,0.7);
+        }
+        .modal-contenido #lore-resultado { 
+            font-family: var(--fuente-descripcion); 
+            font-size: 1.05rem; 
+            line-height: 1.8; 
+            white-space: pre-wrap; 
+            text-align: left;
+            color: #e0e0e0;
+        }
+        .modal-cerrar { 
+            position: absolute; 
+            top: 15px; 
+            right: 15px; 
+            background: none; 
+            border: none; 
+            color: var(--texto-claro); 
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .modal-cerrar:hover {
+            color: var(--color-secundario);
+        }
+        .loader { 
+            width: 60px;
+            height: 60px; 
+            border: 6px solid rgba(255,255,255,0.2); 
+            border-top-color: var(--color-primario); 
+            border-radius: 50%; 
+            animation: spin 1s linear infinite; 
+            margin: 30px auto; 
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @media (max-width: 767px) {
+            .navegacion-principal { 
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero h1 { 
+                width: 80vw;
+                margin: 0 auto 20px auto;
+                font-size: clamp(2.5rem, 15vw, 5rem);
+                text-align: center;
+            }
+            h2 { font-size: clamp(1.8rem, 10vw, 3rem); }
+            .seccion-fondo { 
+                padding: 80px 0;
+                background-attachment: scroll;
+            } 
+            .tarjeta-civ { padding: 25px; margin-bottom: 30px; }
+            .form-suscripcion { width: 95%; }
+            .botones-enlaces a { min-width: 100%; width: auto; }
+            .scroll-indicator {
+                bottom: -150px;
+                font-size: 2rem;
+            }
+        }
+        @media (min-width: 768px) {
+            .navegacion-principal a { margin: 0 20px; font-size: 1rem; }
+            .tarjeta-civ { max-width: 400px; }
+            .seccion-civilizacion .container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 40px;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            .tarjeta-civ { margin-bottom: 0; }
+            .menu-toggle {
+                display: none;
+            }
+        }
+        @media (min-width: 1024px) {
+            .navegacion-principal a { font-size: 1.05rem; }
+            .hero p { font-size: 1.5rem; }
+            .tarjeta-civ { max-width: 380px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navegacion-principal">
+        <nav class="container">
+            <a href="#hero" aria-label="NUVAGAIA, ir al inicio">NUVAGAIA</a>
+            <a href="#Solarpunk" aria-label="Sección Solarpunk">Solarpunk</a>
+            <a href="#Hydropunk" aria-label="Sección Hydropunk">Hydropunk</a>
+            <a href="#Nanopunk" aria-label="Sección Nanopunk">Nanopunk</a>
+            <a href="#Tejedores-de-Estrellas" aria-label="Sección Tejedores de Estrellas">Tejedores de Estrellas</a>
+            <a href="#suscripcion" aria-label="Sección de suscripción">Únete</a>
+        </nav>
+    </header>
+    
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú de navegación">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <button class="close-menu" id="close-menu" aria-label="Cerrar menú de navegación">&times;</button>
+        <nav class="container">
+            <a href="#hero" onclick="cerrarMenuMovil();">NUVAGAIA</a>
+            <a href="#Solarpunk" onclick="cerrarMenuMovil();">Solarpunk</a>
+            <a href="#Hydropunk" onclick="cerrarMenuMovil();">Hydropunk</a>
+            <a href="#Nanopunk" onclick="cerrarMenuMovil();">Nanopunk</a>
+            <a href="#Tejedores-de-Estrellas" onclick="cerrarMenuMovil();">Tejedores de Estrellas</a>
+            <a href="#suscripcion" onclick="cerrarMenuMovil();">Únete</a>
+        </nav>
+    </div>
+
+    <main>
+        <section id="hero" class="seccion-fondo hero">
+            <div class="container contenido-hero">
+                <h1 class="fade-in-up">NUVAGAIA</h1>
+                <p id="subtitulo-hero" class="fade-in-up">EL VIEJO MUNDO SE QUEBRÓ, DE LAS CENIZAS EMERGIERON TRES CIVILIZACIONES...</p>
+                <a id="hero-cta" class="boton-cta fade-in">¡Descúbrelas!</a>
+                <div class="scroll-indicator fade-in-up">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
+        
+        <section id="Solarpunk" class="seccion-fondo solarpunk seccion-civilizacion">
+            <div class="container fade-in-up">
+                <div class="tarjeta-civ">
+                    <img src="https://placehold.co/400x400/1a2a22/b3d338?text=SOLARPUNK" alt="Arte Solarpunk: Ciudades Bio-Integradas">
+                    <h3>Solarpunk</h3>
+                    <p class="descripcion-civ">
+                        Eligieron mirar al sol, buscan redención en la simbiosis con la naturaleza. Sus ciudades son organismos vivos, donde la bioingeniería y la flora son una. Su misión: sanar el mundo.
+                    </p>
+                    <div class="botones-tarjeta">
+                        <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Vive la utopía!</a>
+                        <button class="boton-lore" onclick="generarLore('Solarpunk')">Generar un relato</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="Hydropunk" class="seccion-fondo hydropunk seccion-civilizacion">
+            <div class="container fade-in-up">
+                <div class="tarjeta-civ">
+                    <img src="https://placehold.co/400x400/2c4a5f/9ed9f1?text=HYDROPUNK" alt="Arte Hydropunk: Flotas Aerostáticas">
+                    <h3>Hydropunk</h3>
+                    <p class="descripcion-civ">
+                        Nómadas de los vientos y el hidrógeno. Sus ciudades flotantes surcan cielos infinitos. Para ellos, el movimiento es sagrado, la independencia un arte y la adaptabilidad su virtud.
+                    </p>
+                    <div class="botones-tarjeta">
+                        <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Navega sus cielos!</a>
+                        <button class="boton-lore" onclick="generarLore('Hydropunk')">Generar un relato</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="Nanopunk" class="seccion-fondo nanopunk seccion-civilizacion">
+            <div class="container fade-in-up">
+                <div class="tarjeta-civ">
+                    <img src="https://placehold.co/400x400/1C1C1C/f58228?text=NANOPUNK" alt="Arte Nanopunk: Abismos de Neón y Silicio">
+                    <h3>Nanopunk</h3>
+                    <p class="descripcion-civ">
+                        Habitantes de los abismos de neón y silicio. Rediseñados por la necesidad, la nanotecnología es su segunda piel. Luchan por la autonomía y la libertad de rehacerse a sí mismos.
+                    </p>
+                    <div class="botones-tarjeta">
+                        <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Adéntrate en su código!</a>
+                        <button class="boton-lore" onclick="generarLore('Nanopunk')">Generar un relato</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="intersticial-1" class="texto-intersticial seccion-fondo">
+            <div class="container">
+                <p class="fade-in-up">COEXISTIERON, HASTA QUE LA REALIDAD MISMA SE RASGÓ CON LA APARICIÓN DE LOS...</p>
+            </div>
+        </section>
+        
+        <section id="Tejedores-de-Estrellas" class="seccion-fondo tejedores seccion-civilizacion">
+            <div class="container fade-in-up">
+                <div class="tarjeta-civ">
+                    <img src="https://placehold.co/400x400/2b1f3e/76a6ff?text=TEJEDORES+DE+ESTRELLAS" alt="Arte Tejedores de Estrellas: Entidades Cósmicas">
+                    <h3>Tejedores de Estrellas</h3>
+                    <p class="descripcion-civ">
+                        Entidades cósmicas más allá de la comprensión humana. Su mera presencia altera las leyes físicas, siembra sueños imposibles y su propósito: transmutar la existencia. 
+                    </p>
+                    <div class="botones-tarjeta">
+                        <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Desvela el misterio!</a>
+                        <button class="boton-lore" onclick="generarLore('Tejedores de Estrellas')">Generar un relato</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="intersticial-2" class="texto-intersticial seccion-fondo">
+            <div class="container">
+                <p class="fade-in-up">EL MUNDO ESTÁ EN MEDIO DE SU RENACIMIENTO, O DE UN CAMBIO DEFINITIVO</p>
+            </div>
+        </section>
+        
+        <div class="contact-and-footer-wrapper">
+           <section id="suscripcion" class="seccion-fondo">
+    <div class="container">
+        <h2 class="fade-in-up">Únete al Mundo de NUVAGAIA</h2>
+        <p class="fade-in-up">
+            Sé el primero en recibir actualizaciones, adelantos exclusivos, arte conceptual y noticias sobre el desarrollo de NUVAGAIA directamente en tu correo.
+        </p>
+
+        <form class="form-suscripcion fade-in-up"
+              action="https://nuvagaia.substack.com/api/v1/free"
+              method="post"
+              target="_blank"
+              onsubmit="mostrarMensaje();">
+            <input type="email" name="email" placeholder="Tu correo electrónico cósmico..." required>
+            <button type="submit">Suscribirme</button>
+        </form>
+
+        <!-- Mensaje de confirmación -->
+        <p id="suscripcion-mensaje" style="margin-top: 20px; font-weight: 600; color: var(--color-primario); opacity: 0; transition: opacity 0.3s ease;">
+            ¡Gracias por unirte al viaje! 🚀
+        </p>
+    </div>
+</section>
+
+<script>
+function mostrarMensaje() {
+    const mensaje = document.getElementById("suscripcion-mensaje");
+    mensaje.style.opacity = "1";
+}
+</script>
+
+            
+            <footer class="pie-pagina">
+                <div class="container">
+                    <div class="seccion-enlaces">
+                        <h2 class="fade-in">EXPLORA NUVAGAIA</h2>
+                        <div class="botones-enlaces">
+                            <a href="https://substack.com/@nuvagaia" target="_blank" aria-label="NUVAGAIA en Spotify"><i class="fab fa-spotify"></i>Transmisiones del Vacío</a>
+                            <a href="https://substack.com/@nuvagaia" target="_blank" id="substack-link" aria-label="Blog de NUVAGAIA en Substack">
+                                <img src="https://i.postimg.cc/yxcxZRXm/icono-transp-Substack-Blue.png" 
+                                     alt="Substack Icon" 
+                                     class="icon-png"
+                                     data-hover-src="https://i.postimg.cc/9fCdFm2g/icono-transp-Substack-dark.png">
+                                Crónicas Fractales
+                            </a>
+                            <a href="https://substack.com/@nuvagaia" target="_blank" id="notion-link" aria-label="Documentación de NUVAGAIA en Notion">
+                                <img src="https://i.postimg.cc/MGcwsr9W/icono-transp-Notion-orange.png" 
+                                     alt="Notion Icon" 
+                                     class="icon-png"
+                                     data-hover-src="https://i.postimg.cc/RhM1hP45/icono-transp-Notion-dark.png">
+                                Archivos de la Convergencia
+                            </a>
+                        </div>
+                    </div>
+                    <div class="seccion-enlaces">
+                        <h2 class="fade-in">SIGUE LAS SEÑALES</h2>
+                        <div class="enlaces-sociales">
+                            <a href="https://x.com/nuvagaia" target="_blank" aria-label="Twitter X"><i class="fab fa-x-twitter"></i></a>
+                            <a href="https://www.instagram.com/nuvagaia/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.tiktok.com/@nuvagaia" target="_blank" aria-label="tiktok"><i class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                    <p><small>&copy; 2025 NUVAGAIA. Todos los derechos reservados.</small></p>
+                    <p><small>NUVAGAIA&trade; es una marca comercial de Gerard Bisbal Brucart.</small></p>
+                </div>
+            </footer>
+        </div>
+    </main>
+    
+    <div id="modal-lore" class="modal-overlay">
+        <div class="modal-contenido">
+            <button class="modal-cerrar" id="modal-cerrar" aria-label="Cerrar modal">&times;</button>
+            <h4 id="modal-titulo">Transmisión Entrante...</h4>
+            <div id="lore-resultado">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const nuvagaiaLoreDB = {
+            "Solarpunk": {
+                resumen: "Herederos de un pasado caótico, los Solarpunk viven en ciudades que son organismos vivos, donde la bioingeniería y la flora son indistinguibles. Su misión es sanar el mundo y tejer nuevas formas de existencia en comunión absoluta con la Naturaleza.",
+                datosClave: ["Priorizan la diplomacia regenerativa y el uso de tecnologías de contención suave, como enjambres de esporas disruptivas.", "Sus hogares están biológicamente integrados con el entorno: paredes que respiran, techos que florecen y sistemas de climatización autorregulados.", "La agricultura es curación del suelo; usan herramientas vivas y simbióticas, como guantes que se ajustan al pul pulso de la planta.", "Su piel tiene matices cálidos y microvellosidades sensoriales capaces de detectar vibraciones ambientales, con implantes simbióticos que liberan compuestos fotoprotectores."],
+                personajes: ["Emiya Sol, Bioingeniera", "Lucien Lys, Mercader Botánico"],
+                color: "#b3d338", shadowColor: "rgba(179,211,56,0.7)", displayTitle: "Transmisión Solarpunk"
+            },
+            "Hydropunk": {
+                resumen: "Nómadas de los vientos y el hidrógeno, los Hydropunk surcan cielos infinitos en flotillas de dirigibles y navíos celestes que son ciudades errantes. Para ellos, el movimiento es vida, la exploración es deber y la adaptabilidad su virtud.",
+                datosClave: ["Responden a los conflictos desde la movilidad y el retraimiento táctico, prefiriendo la elusión, el cerco o el bloqueo.", "Sus ciudades flotantes se entretejen con arquitectura transparente y tejidos avanzados que son el material por excelencia.", "Su piel es resistente y transpirable, con microperforaciones que regulan la humedad y expulsan el sudor en forma de niebla ligera.", "Sus pupilas son ligeramente ovaladas y optimizadas para visión panorámica y estabilidad de horizonte en las alturas."],
+                personajes: ["Keiron Varo, apodado Capitán de Niebla", "Leïla Lior, una joven Recolectora de la Bruma"],
+                color: "#9ed9f1", shadowColor: "rgba(158,217,241,0.7)", displayTitle: "Transmisión Hydropunk"
+            },
+            "Nanopunk": {
+                resumen: "Habitantes de los abismos de neón y silicio, los Nanopunk son humanos rediseñados por la necesidad, con la nanotecnología como segunda piel. Luchan por preservar su autonomía y el derecho a transformarse en un mundo que los olvidó.",
+                datosClave: ["En conflictos, emplean enjambres de nanodrones para sabotear infraestructuras o infiltrar redes de información.", "Su rutina diaria está integrada con algoritmos de gestión personal; sus viviendas modulares cambian según las necesidades.", "Su dermis tiene microcapas reflectoras de luz azulada que mejoran el reconocimiento nocturno y reducen la fatiga visual.", "Poseen sutiles tatuajes de circuitos luminosos en su piel, reflejo de su integración tecnológica. éstos tatuajes cambian y se iluminan en función de las emociones."],
+                personajes: ["Dra. Lua Dael, Arquitecta de Microhabitats", "Jarek Quin, Especialista en Entrenamiento Modular"],
+                color: "#f58228", shadowColor: "rgba(245,130,40,0.7)", displayTitle: "Transmisión Nanopunk"
+            },
+            "Tejedores de Estrellas": {
+                resumen: "Entidades cósmicas surgidas de la materia oscura y la conciencia autocreada, los Tejedores de Estrellas transmutan la realidad. Su mera presencia altera las leyes físicas, siembra sueños imposibles y su propósito es expandir su comprensión del tejido del universo.",
+                datosClave: ["Su llegada no fue una invasión, sino un fenómeno lento y casi imperceptible que transformó la realidad.", "No son dioses, invasores ni profetas; son umbrales que obligan a cada civilización a preguntarse quién es realmente.", "El contacto con un Tejedor deja huellas que alteran el cuerpo, los pensamientos y las funciones más básicas.", "Quienes han estado cerca relatan sensaciones de unidad total, visiones compartidas de estructuras imposibles o la certeza de haber sido soñados por algo más antiguo que el universo."],
+                color: "#76a6ff", shadowColor: "rgba(118,166,255,0.7)", displayTitle: "Transmisiones Resonantes"
+            }
+        };
+
+        const dom = {
+            modal: document.getElementById('modal-lore'),
+            modalTitulo: document.getElementById('modal-titulo'),
+            loreResultado: document.getElementById('lore-resultado'),
+            menuToggle: document.getElementById('menu-toggle'),
+            mobileMenuOverlay: document.getElementById('mobile-menu-overlay'),
+            closeMenu: document.getElementById('close-menu'),
+            suscripcionForm: document.querySelector('.form-suscripcion'),
+            suscripcionMensaje: document.getElementById('suscripcion-mensaje'),
+            emailInput: document.getElementById('email-suscripcion'),
+            modalCerrarBtn: document.getElementById('modal-cerrar'),
+            heroCta: document.getElementById('hero-cta')
+        };
+
+        function initObservers() {
+            const animatedElements = document.querySelectorAll('.fade-in, .fade-in-up');
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            animatedElements.forEach(element => observer.observe(element));
+        }
+
+        function initMobileMenu() {
+            if (dom.menuToggle && dom.mobileMenuOverlay && dom.closeMenu) {
+                dom.menuToggle.addEventListener('click', () => dom.mobileMenuOverlay.classList.add('active'));
+                dom.closeMenu.addEventListener('click', () => dom.mobileMenuOverlay.classList.remove('active'));
+                dom.mobileMenuOverlay.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => dom.mobileMenuOverlay.classList.remove('active'));
+                });
+            }
+        }
+        
+        // Función de easing para una animación de desplazamiento suave
+        function easeInOutQuad(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+
+        // Función para el desplazamiento suave
+        function smoothScrollTo(targetY, duration) {
+            const startY = window.scrollY;
+            const distanceY = targetY - startY;
+            const startTime = performance.now();
+
+            const animateScroll = (currentTime) => {
+                const elapsedTime = currentTime - startTime;
+                const newY = easeInOutQuad(elapsedTime, startY, distanceY, duration);
+
+                window.scrollTo(0, newY);
+
+                if (elapsedTime < duration) {
+                    requestAnimationFrame(animateScroll);
+                }
+            };
+            requestAnimationFrame(animateScroll);
+        }
+
+        function initSmoothScroll() {
+            if (dom.heroCta) {
+                dom.heroCta.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const targetSection = document.getElementById('Solarpunk');
+                    if (targetSection) {
+                        smoothScrollTo(targetSection.offsetTop, 1500); // 1500ms = 1.5 segundos de duración
+                    }
+                });
+            }
+        }
+
+        function initIconHover() {
+            const linksWithIcons = document.querySelectorAll('.botones-enlaces a');
+            linksWithIcons.forEach(link => {
+                const icon = link.querySelector('.icon-png');
+                if (icon) {
+                    const originalSrc = icon.src;
+                    const hoverSrc = icon.getAttribute('data-hover-src');
+                    link.addEventListener('mouseover', () => { icon.src = hoverSrc; });
+                    link.addEventListener('mouseout', () => { icon.src = originalSrc; });
+                }
+            });
+        }
+        
+        function openModal() { dom.modal.classList.add('visible'); }
+        function closeModal() { dom.modal.classList.remove('visible'); }
+
+        async function generarLore(civName) {
+            openModal();
+            const loreInfo = nuvagaiaLoreDB[civName];
+            if (!loreInfo) {
+                dom.modalTitulo.innerText = "Error de Transmisión";
+                dom.loreResultado.innerText = "Error: Civilización no encontrada en la base de datos de NUVAGAIA.";
+                console.error(`Civilización no encontrada: ${civName}`);
+                return;
+            }
+
+            const modalContent = dom.modal.querySelector('.modal-contenido');
+            modalContent.style.borderColor = loreInfo.color;
+            dom.modalTitulo.style.color = loreInfo.color;
+            dom.modalTitulo.style.textShadow = `0 0 10px ${loreInfo.shadowColor}`;
+            dom.modalTitulo.innerText = loreInfo.displayTitle;
+            
+            dom.loreResultado.innerHTML = `<div class="loader" style="border-top-color: ${loreInfo.color};"></div>`;
+
+            const detailedContext = `Eres un cronista experto del universo de ciencia ficción 'NUVAGAIA'. Usa estrictamente la siguiente información canónica para escribir un fragmento de lore (entre 60 y 110 palabras) sobre la civilización '${civName}'.\n\n--- Base de Conocimiento Canónico ---\n${JSON.stringify(loreInfo, null, 2)}\n--- Fin de la Base de Conocimiento ---\n\nEl fragmento de lore debe ser evocador y sentirse como parte de una historia más grande. No saludes ni te despidas, solo escribe el fragmento de lore.`;
+            
+            try {
+                const payload = { contents: [{ role: "user", parts: [{ text: detailedContext }] }] };
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) { throw new Error(`API Error: ${response.status} ${response.statusText}`); }
+                
+                const result = await response.json();
+                let generatedText = "No se pudo obtener una respuesta válida. Inténtalo de nuevo.";
+                if (result.candidates && result.candidates[0]?.content?.parts?.[0]?.text) {
+                    generatedText = result.candidates[0].content.parts[0].text;
+                } else {
+                    console.warn("Unexpected response structure:", result);
+                }
+                dom.loreResultado.innerText = generatedText;
+            } catch (error) {
+                console.error("Error generating lore:", error);
+                dom.loreResultado.innerText = "Error en la transmisión. No se pudo conectar con la red de NUVAGAIA. Por favor, inténtalo más tarde.";
+            }
+        }
+        
+        function handleSubscription(event) {
+            event.preventDefault();
+            const email = dom.emailInput.value;
+            if (email && email.includes('@')) {
+                console.log(`Email '${email}' suscrito.`);
+                dom.suscripcionMensaje.innerText = `¡Gracias por unirte a las Crónicas de NUVAGAIA, ${email}!`;
+                dom.suscripcionMensaje.style.color = 'var(--color-primario)';
+                dom.suscripcionMensaje.style.opacity = 1;
+                dom.emailInput.value = '';
+                setTimeout(() => { dom.suscripcionMensaje.style.opacity = 0; }, 5000);
+            } else {
+                dom.suscripcionMensaje.innerText = "Por favor, introduce un correo electrónico válido.";
+                dom.suscripcionMensaje.style.color = 'var(--color-secundario)';
+                dom.suscripcionMensaje.style.opacity = 1;
+                setTimeout(() => { 
+                    dom.suscripcionMensaje.style.opacity = 0;
+                    dom.suscripcionMensaje.style.color = 'var(--color-primario)';
+                }, 3000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initObservers();
+            initMobileMenu();
+            initSmoothScroll();
+            initIconHover();
+            dom.modalCerrarBtn.addEventListener('click', closeModal);
+            dom.modal.addEventListener('click', (event) => { if (event.target === dom.modal) closeModal(); });
+            dom.suscripcionForm.addEventListener('submit', handleSubscription);
+            document.querySelectorAll('.boton-lore').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const civName = event.target.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    generarLore(civName);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
