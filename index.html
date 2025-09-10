@@ -874,35 +874,32 @@
         </section>
         
         <div class="contact-and-footer-wrapper">
-           <section id="suscripcion" class="seccion-fondo">
-    <div class="container">
-        <h2 class="fade-in-up">Únete al Mundo de NUVAGAIA</h2>
-        <p class="fade-in-up">
-            Sé el primero en recibir actualizaciones, adelantos exclusivos, arte conceptual y noticias sobre el desarrollo de NUVAGAIA directamente en tu correo.
-        </p>
+<section id="suscripcion" class="seccion-fondo">
+  <div class="container">
+    <h2 class="fade-in-up">Únete al Mundo de NUVAGAIA</h2>
+    <p class="fade-in-up">
+      Sé el primero en recibir actualizaciones, adelantos exclusivos, arte conceptual 
+      y noticias sobre el desarrollo de NUVAGAIA directamente en tu correo.
+    </p>
 
-        <form class="form-suscripcion fade-in-up"
-              action="https://nuvagaia.substack.com/api/v1/free"
-              method="post"
-              target="_blank"
-              onsubmit="mostrarMensaje();">
-            <input type="email" name="email" placeholder="Tu correo electrónico cósmico..." required>
-            <button type="submit">Suscribirme</button>
-        </form>
-
-        <!-- Mensaje de confirmación -->
-        <p id="suscripcion-mensaje" style="margin-top: 20px; font-weight: 600; color: var(--color-primario); opacity: 0; transition: opacity 0.3s ease;">
-            ¡Gracias por unirte al viaje! 🚀
-        </p>
+    <div class="form-suscripcion fade-in-up" style="max-width: 500px; margin: 0 auto;">
+      <iframe 
+        src="https://nuvagaia.substack.com/embed" 
+        width="100%" 
+        height="220" 
+        style="
+          background: white; 
+          border: 2px solid var(--color-primario); 
+          border-radius: 12px; 
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        " 
+        frameborder="0" 
+        scrolling="no">
+      </iframe>
     </div>
+  </div>
 </section>
 
-<script>
-function mostrarMensaje() {
-    const mensaje = document.getElementById("suscripcion-mensaje");
-    mensaje.style.opacity = "1";
-}
-</script>
 
             
             <footer class="pie-pagina">
@@ -1157,3 +1154,4 @@ function mostrarMensaje() {
     </script>
 </body>
 </html>
+
