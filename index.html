@@ -58,26 +58,72 @@
             padding: 120px 0;
             background-size: cover;
             background-position: center center;
-            background-attachment: fixed;
             overflow: hidden;
-        }
-        .seccion-fondo.hero {
-            background-image: url('img/HeroBG.webp');
-        }
-        .seccion-fondo.solarpunk {
-            background-image: url('img/SolarpunkSectionBG.webp');
-        }
-        .seccion-fondo.hydropunk {
-            background-image: url('img/HydropunkSectionBG.webp');
-        }
-        .seccion-fondo.nanopunk {
-            background-image: url('img/NanopunkSectionBG.webp');
-        }
-        .seccion-fondo.tejedores {
-            background-image: url('img/TejedoresSectionBG.webp');
-        }
-        .seccion-fondo.intersticial {
-            background-image: url('img/TransicionSectionBG.webp');
+            
+/* ===== FONDOS POR SECCIÓN (DESKTOP) ===== */
+.seccion-fondo.hero {
+    background-image: url('img/HeroBG.webp');
+    background-attachment: fixed;
+}
+
+.seccion-fondo.solarpunk {
+    background-image: url('img/SolarpunkSectionBG.webp');
+    background-attachment: fixed;
+}
+
+.seccion-fondo.hydropunk {
+    background-image: url('img/HydropunkSectionBG.webp');
+    background-attachment: fixed;
+}
+
+.seccion-fondo.nanopunk {
+    background-image: url('img/NanopunkSectionBG.webp');
+    background-attachment: fixed;
+}
+
+.seccion-fondo.tejedores {
+    background-image: url('img/TejedoresSectionBG.webp');
+    background-attachment: fixed;
+}
+
+.seccion-fondo.intersticial {
+    background-image: url('img/TransicionSectionBG.webp');
+    background-attachment: fixed;
+}
+
+/* ===== VERSIÓN MÓVIL (≤ 768px) ===== */
+@media (max-width: 768px) {
+    .seccion-fondo.hero {
+        background-image: url('img/HeroBG-1080.webp');
+        background-attachment: scroll;
+    }
+
+    .seccion-fondo.solarpunk {
+        background-image: url('img/SolarpunkSectionBG-1080.webp');
+        background-attachment: scroll;
+    }
+
+    .seccion-fondo.hydropunk {
+        background-image: url('img/HydropunkSectionBG-1080.webp');
+        background-attachment: scroll;
+    }
+
+    .seccion-fondo.nanopunk {
+        background-image: url('img/NanopunkSectionBG-1080.webp');
+        background-attachment: scroll;
+    }
+
+    .seccion-fondo.tejedores {
+        background-image: url('img/TejedoresSectionBG-1080.webp');
+        background-attachment: scroll;
+    }
+
+    .seccion-fondo.intersticial {
+        background-image: url('img/TransicionSectionBG-1080.webp');
+        background-attachment: scroll;
+    }
+}
+
         }
         h1 { font-size: clamp(3rem, 10vw, 7rem); font-weight: 600; text-transform: uppercase; line-height: 1; margin-bottom: 20px;}
         h2 { font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 600; margin-bottom: 40px; text-transform: uppercase; }
@@ -1157,6 +1203,7 @@
     </script>
 </body>
 </html>
+
 
 
 
