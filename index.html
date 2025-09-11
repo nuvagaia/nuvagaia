@@ -48,52 +48,55 @@
             position: relative;
             z-index: 2;
         }
-        .seccion-fondo {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 120px 0;
-            background-size: cover;
-            background-position: center center;
-            overflow: hidden;
-        }
-            
-/* ===== FONDOS POR SECCIÓN (DESKTOP) ===== */
+        
+/* ===== BLOQUE GENERAL ===== */
+.seccion-fondo {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 0;
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+}
+
+/* ===== FONDOS DESKTOP (≥ 769px) ===== */
 @media (min-width: 769px) {
-.seccion-fondo.hero {
-    background-image: url('img/HeroBG.webp');
-    background-attachment: fixed;
+    .seccion-fondo.hero {
+        background-image: url('img/HeroBG.webp');
+        background-attachment: fixed;
+    }
+
+    .seccion-fondo.solarpunk {
+        background-image: url('img/SolarpunkSectionBG.webp');
+        background-attachment: fixed;
+    }
+
+    .seccion-fondo.hydropunk {
+        background-image: url('img/HydropunkSectionBG.webp');
+        background-attachment: fixed;
+    }
+
+    .seccion-fondo.nanopunk {
+        background-image: url('img/NanopunkSectionBG.webp');
+        background-attachment: fixed;
+    }
+
+    .seccion-fondo.tejedores {
+        background-image: url('img/TejedoresSectionBG.webp');
+        background-attachment: fixed;
+    }
+
+    .seccion-fondo.intersticial {
+        background-image: url('img/TransicionSectionBG.webp');
+        background-attachment: fixed;
+    }
 }
 
-.seccion-fondo.solarpunk {
-    background-image: url('img/SolarpunkSectionBG.webp');
-    background-attachment: fixed;
-}
-
-.seccion-fondo.hydropunk {
-    background-image: url('img/HydropunkSectionBG.webp');
-    background-attachment: fixed;
-}
-
-.seccion-fondo.nanopunk {
-    background-image: url('img/NanopunkSectionBG.webp');
-    background-attachment: fixed;
-}
-
-.seccion-fondo.tejedores {
-    background-image: url('img/TejedoresSectionBG.webp');
-    background-attachment: fixed;
-}
-
-.seccion-fondo.intersticial {
-    background-image: url('img/TransicionSectionBG.webp');
-    background-attachment: fixed;
-}
-
-/* ===== VERSIÓN MÓVIL (≤ 768px) ===== */
+/* ===== FONDOS MÓVIL (≤ 768px) ===== */
 @media (max-width: 768px) {
     .seccion-fondo.hero {
         background-image: url('img/HeroBG-1080.webp');
@@ -1205,6 +1208,7 @@
     </script>
 </body>
 </html>
+
 
 
 
