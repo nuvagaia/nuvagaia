@@ -62,6 +62,15 @@
     background-position: center center;
     overflow: hidden;
 }
+        
+/* Suavizado de entrada de fondos */
+.seccion-fondo {
+  transition: background-image 0s ease-in-out, opacity 0.6s ease-in-out;
+  opacity: 0;
+}
+.seccion-fondo.bg-loaded {
+  opacity: 1;
+}
 
 @media (max-width: 768px) {
   .contact-and-footer-wrapper {
@@ -1170,6 +1179,7 @@
             : entry.target.dataset.bgDesktop;
 
           entry.target.style.backgroundImage = `url(${bg})`;
+          entry.target.classList.add("bg-loaded");
 
           if (!isMobile) {
             entry.target.style.backgroundAttachment = "fixed";
@@ -1180,13 +1190,14 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { rootMargin: "100px 0px", threshold: 0.1 });
+    }, { rootMargin: "300px 0px", threshold: 0.1 });
 
     secciones.forEach(sec => observer.observe(sec));
         });
     </script>
 </body>
 </html>
+
 
 
 
