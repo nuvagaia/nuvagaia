@@ -317,12 +317,6 @@
             /* Aceleración GPU para scroll más suave */
             will-change: transform, opacity;
             transform: translateZ(0);
-
-            /* Versión más ligera en móviles */
-        @media (max-width: 768px) {
-            .tarjeta-civ {
-                box-shadow: 0 2px 10px rgba(0,0,0,0.3);  /* sombra más ligera */
-                backdrop-filter: blur(1px);              /* menos blur para ahorrar GPU */
         }
         .tarjeta-civ:hover {
             transform: translateY(-10px);
@@ -1209,8 +1203,6 @@
     </script>
 </body>
 </html>
-
-
 
 
 
