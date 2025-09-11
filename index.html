@@ -63,73 +63,12 @@
     overflow: hidden;
 }
 
-/* ===== FONDOS DESKTOP (≥ 769px) ===== */
-@media (min-width: 769px) {
-    .seccion-fondo.hero {
-        background-image: url('img/HeroBG.webp');
-        background-attachment: fixed;
-    }
-
-    .seccion-fondo.solarpunk {
-        background-image: url('img/SolarpunkSectionBG.webp');
-        background-attachment: fixed;
-    }
-
-    .seccion-fondo.hydropunk {
-        background-image: url('img/HydropunkSectionBG.webp');
-        background-attachment: fixed;
-    }
-
-    .seccion-fondo.nanopunk {
-        background-image: url('img/NanopunkSectionBG.webp');
-        background-attachment: fixed;
-    }
-
-    .seccion-fondo.tejedores {
-        background-image: url('img/TejedoresSectionBG.webp');
-        background-attachment: fixed;
-    }
-
-    .seccion-fondo.intersticial {
-        background-image: url('img/TransicionSectionBG.webp');
-        background-attachment: fixed;
-    }
-}
-
-/* ===== FONDOS MÓVIL (≤ 768px) ===== */
 @media (max-width: 768px) {
-    .seccion-fondo.hero {
-        background-image: url('img/HeroBG-1080.webp');
-        background-attachment: scroll;
-    }
-
-    .seccion-fondo.solarpunk {
-        background-image: url('img/SolarpunkSectionBG-1080.webp');
-        background-attachment: scroll;
-    }
-
-    .seccion-fondo.hydropunk {
-        background-image: url('img/HydropunkSectionBG-1080.webp');
-        background-attachment: scroll;
-    }
-
-    .seccion-fondo.nanopunk {
-        background-image: url('img/NanopunkSectionBG-1080.webp');
-        background-attachment: scroll;
-    }
-
-    .seccion-fondo.tejedores {
-        background-image: url('img/TejedoresSectionBG-1080.webp');
-        background-attachment: scroll;
-    }
-
-    .seccion-fondo.intersticial {
-        background-image: url('img/TransicionSectionBG-1080.webp');
-        background-attachment: scroll;
-    }
+  .contact-and-footer-wrapper {
+    background-attachment: scroll;
+  }
 }
 
-        }
         h1 { font-size: clamp(3rem, 10vw, 7rem); font-weight: 600; text-transform: uppercase; line-height: 1; margin-bottom: 20px;}
         h2 { font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 600; margin-bottom: 40px; text-transform: uppercase; }
         h3 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 600; margin-bottom: 15px; }
@@ -489,7 +428,6 @@
         #Tejedores-de-Estrellas .boton-lore:hover, #Tejedores-de-Estrellas .boton-lore:focus { background-color: #76a6ff; color: var(--fondo-oscuro); box-shadow: 0 0 15px #76a6ff; transform: translateY(-3px); }
         .texto-intersticial { 
             background-color: #0c142c;
-            background-image: url('img/TransicionSectionBG.webp');
             padding: 150px 0; 
             min-height: auto; 
         }
@@ -840,92 +778,107 @@
     </div>
 
     <main>
-        <section id="hero" class="seccion-fondo hero">
-            <div class="container contenido-hero">
-                <h1 class="fade-in-up">NUVAGAIA</h1>
-                <p id="subtitulo-hero" class="fade-in-up">EL VIEJO MUNDO SE QUEBRÓ, DE LAS CENIZAS EMERGIERON TRES CIVILIZACIONES...</p>
-                <a id="hero-cta" class="boton-cta fade-in">¡Descúbrelas!</a>
-                <div class="scroll-indicator fade-in-up">
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-            </div>
-        </section>
-        
-        <section id="Solarpunk" class="seccion-fondo solarpunk seccion-civilizacion">
-            <div class="container fade-in-up">
-                <div class="tarjeta-civ">
-                    <img src="img/Solarpunk.webp" alt="Arte Solarpunk: Ciudades Vivas">
-                    <h3>Solarpunk</h3>
-                    <p class="descripcion-civ">
-                        Eligieron mirar al sol, buscan redención en la simbiosis con la naturaleza. Sus ciudades son organismos vivos, donde la bioingeniería y la flora son una. Su misión: sanar el mundo.
-                    </p>
-                    <div class="botones-tarjeta">
-                        <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Vive la utopía!</a>
-                        <button class="boton-lore" onclick="generarLore('Solarpunk')">Generar un relato</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+<section id="hero" class="seccion-fondo hero"
+         data-bg-desktop="img/HeroBG.webp"
+         data-bg-mobile="img/HeroBG-1080.webp">
+    <div class="container contenido-hero">
+        <h1 class="fade-in-up">NUVAGAIA</h1>
+        <p id="subtitulo-hero" class="fade-in-up">EL VIEJO MUNDO SE QUEBRÓ, DE LAS CENIZAS EMERGIERON TRES CIVILIZACIONES...</p>
+        <a id="hero-cta" class="boton-cta fade-in">¡Descúbrelas!</a>
+        <div class="scroll-indicator fade-in-up">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+</section>
 
-        <section id="Hydropunk" class="seccion-fondo hydropunk seccion-civilizacion">
-            <div class="container fade-in-up">
-                <div class="tarjeta-civ">
-                    <img src="img/Hydropunk.webp" alt="Arte Hydropunk: Ciudades Flotantes">
-                    <h3>Hydropunk</h3>
-                    <p class="descripcion-civ">
-                        Nómadas de los vientos y el hidrógeno. Sus ciudades flotantes surcan cielos infinitos. Para ellos, el movimiento es sagrado, la independencia un arte y la adaptabilidad su virtud.
-                    </p>
-                    <div class="botones-tarjeta">
-                        <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Navega sus cielos!</a>
-                        <button class="boton-lore" onclick="generarLore('Hydropunk')">Generar un relato</button>
-                    </div>
-                </div>
+<section id="Solarpunk" class="seccion-fondo solarpunk seccion-civilizacion"
+         data-bg-desktop="img/SolarpunkSectionBG.webp"
+         data-bg-mobile="img/SolarpunkSectionBG-1080.webp">
+    <div class="container fade-in-up">
+        <div class="tarjeta-civ">
+            <img src="img/Solarpunk.webp" alt="Arte Solarpunk: Ciudades Vivas">
+            <h3>Solarpunk</h3>
+            <p class="descripcion-civ">
+                Eligieron mirar al sol, buscan redención en la simbiosis con la naturaleza. Sus ciudades son organismos vivos, donde la bioingeniería y la flora son una. Su misión: sanar el mundo.
+            </p>
+            <div class="botones-tarjeta">
+                <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Vive la utopía!</a>
+                <button class="boton-lore" onclick="generarLore('Solarpunk')">Generar un relato</button>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <section id="Nanopunk" class="seccion-fondo nanopunk seccion-civilizacion">
-            <div class="container fade-in-up">
-                <div class="tarjeta-civ">
-                    <img src="img/Nanopunk.webp" alt="Arte Nanopunk: Abismos de Neón y Silicio">
-                    <h3>Nanopunk</h3>
-                    <p class="descripcion-civ">
-                        Habitantes de los abismos de neón y silicio. Rediseñados por la necesidad, la nanotecnología es su segunda piel. Luchan por la autonomía y la libertad de rehacerse a sí mismos.
-                    </p>
-                    <div class="botones-tarjeta">
-                        <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Adéntrate en su código!</a>
-                        <button class="boton-lore" onclick="generarLore('Nanopunk')">Generar un relato</button>
-                    </div>
-                </div>
+<section id="Hydropunk" class="seccion-fondo hydropunk seccion-civilizacion"
+         data-bg-desktop="img/HydropunkSectionBG.webp"
+         data-bg-mobile="img/HydropunkSectionBG-1080.webp">
+    <div class="container fade-in-up">
+        <div class="tarjeta-civ">
+            <img src="img/Hydropunk.webp" alt="Arte Hydropunk: Ciudades Flotantes">
+            <h3>Hydropunk</h3>
+            <p class="descripcion-civ">
+                Nómadas de los vientos y el hidrógeno. Sus ciudades flotantes surcan cielos infinitos. Para ellos, el movimiento es sagrado, la independencia un arte y la adaptabilidad su virtud.
+            </p>
+            <div class="botones-tarjeta">
+                <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Navega sus cielos!</a>
+                <button class="boton-lore" onclick="generarLore('Hydropunk')">Generar un relato</button>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <section id="intersticial-1" class="texto-intersticial seccion-fondo">
-            <div class="container">
-                <p class="fade-in-up">COEXISTIERON, HASTA QUE LA REALIDAD MISMA SE RASGÓ CON LA APARICIÓN DE LOS...</p>
+<section id="Nanopunk" class="seccion-fondo nanopunk seccion-civilizacion"
+         data-bg-desktop="img/NanopunkSectionBG.webp"
+         data-bg-mobile="img/NanopunkSectionBG-1080.webp">
+    <div class="container fade-in-up">
+        <div class="tarjeta-civ">
+            <img src="img/Nanopunk.webp" alt="Arte Nanopunk: Abismos de Neón y Silicio">
+            <h3>Nanopunk</h3>
+            <p class="descripcion-civ">
+                Habitantes de los abismos de neón y silicio. Rediseñados por la necesidad, la nanotecnología es su segunda piel. Luchan por la autonomía y la libertad de rehacerse a sí mismos.
+            </p>
+            <div class="botones-tarjeta">
+                <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Adéntrate en su código!</a>
+                <button class="boton-lore" onclick="generarLore('Nanopunk')">Generar un relato</button>
             </div>
-        </section>
-        
-        <section id="Tejedores-de-Estrellas" class="seccion-fondo tejedores seccion-civilizacion">
-            <div class="container fade-in-up">
-                <div class="tarjeta-civ">
-                    <img src="img/Tejedores.webp" alt="Arte Tejedores de Estrellas: Entidades Cósmicas">
-                    <h3>Tejedores de Estrellas</h3>
-                    <p class="descripcion-civ">
-                        Entidades cósmicas más allá de la comprensión humana. Su mera presencia altera las leyes físicas, siembra sueños imposibles y su propósito: transmutar la existencia. 
-                    </p>
-                    <div class="botones-tarjeta">
-                        <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Desvela el misterio!</a>
-                        <button class="boton-lore" onclick="generarLore('Tejedores de Estrellas')">Generar un relato</button>
-                    </div>
-                </div>
+        </div>
+    </div>
+</section>
+
+<section id="intersticial-1" class="texto-intersticial seccion-fondo"
+         data-bg-desktop="img/TransicionSectionBG.webp"
+         data-bg-mobile="img/TransicionSectionBG-1080.webp">
+    <div class="container">
+        <p class="fade-in-up">COEXISTIERON, HASTA QUE LA REALIDAD MISMA SE RASGÓ CON LA APARICIÓN DE LOS...</p>
+    </div>
+</section>
+
+<section id="Tejedores-de-Estrellas" class="seccion-fondo tejedores seccion-civilizacion"
+         data-bg-desktop="img/TejedoresSectionBG.webp"
+         data-bg-mobile="img/TejedoresSectionBG-1080.webp">
+    <div class="container fade-in-up">
+        <div class="tarjeta-civ">
+            <img src="img/Tejedores.webp" alt="Arte Tejedores de Estrellas: Entidades Cósmicas">
+            <h3>Tejedores de Estrellas</h3>
+            <p class="descripcion-civ">
+                Entidades cósmicas más allá de la comprensión humana. Su mera presencia altera las leyes físicas, siembra sueños imposibles y su propósito: transmutar la existencia. 
+            </p>
+            <div class="botones-tarjeta">
+                <a class="boton-civ" href="https://substack.com/@nuvagaia" target="_blank" aria-label="Visita la página externa">¡Desvela el misterio!</a>
+                <button class="boton-lore" onclick="generarLore('Tejedores de Estrellas')">Generar un relato</button>
             </div>
-        </section>
-        
-        <section id="intersticial-2" class="texto-intersticial seccion-fondo">
-            <div class="container">
-                <p class="fade-in-up">EL MUNDO ESTÁ EN MEDIO DE SU RENACIMIENTO, O DE UN CAMBIO DEFINITIVO</p>
-            </div>
-        </section>
+        </div>
+    </div>
+</section>
+
+<section id="intersticial-2" class="texto-intersticial seccion-fondo"
+         data-bg-desktop="img/TransicionSectionBG.webp"
+         data-bg-mobile="img/TransicionSectionBG-1080.webp">
+    <div class="container">
+        <p class="fade-in-up">EL MUNDO ESTÁ EN MEDIO DE SU RENACIMIENTO, O DE UN CAMBIO DEFINITIVO</p>
+    </div>
+</section>
+
         
         <div class="contact-and-footer-wrapper">
 <section id="suscripcion" class="seccion-fondo">
@@ -1204,10 +1157,37 @@
                     generarLore(civName);
                 });
             });
+            
+                // Lazy loading de fondos (desktop vs móvil)
+    const secciones = document.querySelectorAll(".seccion-fondo");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const isMobile = window.innerWidth <= 768;
+          const bg = isMobile 
+            ? entry.target.dataset.bgMobile 
+            : entry.target.dataset.bgDesktop;
+
+          entry.target.style.backgroundImage = `url(${bg})`;
+
+          if (!isMobile) {
+            entry.target.style.backgroundAttachment = "fixed";
+          } else {
+            entry.target.style.backgroundAttachment = "scroll";
+          }
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "100px 0px", threshold: 0.1 });
+
+    secciones.forEach(sec => observer.observe(sec));
         });
     </script>
 </body>
 </html>
+
 
 
 
