@@ -64,8 +64,8 @@
 
     will-change: background-image, opacity;
 }
-        
-/* Aplica el fade solo a las secciones con fondo lazy */
+
+/* Fade solo en las secciones con fondo lazy */
 .seccion-fondo[data-bg-desktop] {
   transition: background-image 0s ease-in-out, opacity 0.6s ease-in-out;
   opacity: 0;
@@ -80,6 +80,33 @@
 .seccion-fondo:not([data-bg-desktop]) {
   opacity: 1;
 }
+
+/* ===== NUEVO: soporte para <img> como fondo en móvil ===== */
+.seccion-fondo .bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Asegura que el contenido quede por encima del fondo */
+.seccion-fondo > .container { 
+  position: relative; 
+  z-index: 2; 
+}
+
+/* Optimización en móvil para tarjetas */
+@media (max-width: 768px) {
+  .tarjeta-civ {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.28);
+    backdrop-filter: none;
+    background-color: rgba(12,20,44,0.92);
+  }
+}
+
 
 
         h1 { font-size: clamp(3rem, 10vw, 7rem); font-weight: 600; text-transform: uppercase; line-height: 1; margin-bottom: 20px;}
@@ -1197,47 +1224,60 @@
                 });
             });
             
-    // Lazy loading de fondos (robusto con fallbacks y sin /undefined)
-    const secciones = document.querySelectorAll(".seccion-fondo[data-bg-desktop]");
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-    
-        const ds = entry.target.dataset;
-        const isMobile = window.innerWidth <= 768;
-        const isPortrait = window.matchMedia('(orientation: portrait)').matches;
-    
-        // Elegir la mejor imagen disponible, con fallbacks
-        let bg = null;
-        if (!isMobile) {
-          // Desktop: desktop > mobile > portrait
-          bg = ds.bgDesktop || ds.bgMobile || ds.bgPortrait;
-        } else {
-          // Móvil: portrait si está en vertical, si no mobile; si faltan, cae a desktop
-          bg = (isPortrait ? ds.bgPortrait : ds.bgMobile) || ds.bgMobile || ds.bgDesktop;
-        }
-    
-        if (!bg) {
-          console.warn('[NUVAGAIA] Falta data-bg-* en:', entry.target.id || entry.target.className);
-          observer.unobserve(entry.target);
-          return; // evita pedir /undefined
-        }
-    
-        entry.target.style.backgroundImage = `url('${bg}')`;
-        entry.target.classList.add("bg-loaded");
-    
-        entry.target.style.backgroundAttachment = isMobile ? "scroll" : "fixed";
-    
-        observer.unobserve(entry.target);
-      });
-    }, { rootMargin: "300px 0px", threshold: 0.1 });
-    
-    secciones.forEach(sec => observer.observe(sec));
+// Lazy loading de fondos (usa <img> en móvil; background-image en desktop)
+const secciones = document.querySelectorAll(".seccion-fondo[data-bg-desktop]");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    const ds = entry.target.dataset;
+    const isMobile   = window.innerWidth <= 768;
+    const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+
+    // Elegir mejor URL disponible con fallbacks
+    let url = null;
+    if (!isMobile) {
+      url = ds.bgDesktop || ds.bgMobile || ds.bgPortrait;
+    } else {
+      url = (isPortrait ? ds.bgPortrait : ds.bgMobile) || ds.bgMobile || ds.bgDesktop;
+    }
+    if (!url) { observer.unobserve(entry.target); return; }
+
+    if (!isMobile) {
+      // Desktop: background + fixed
+      entry.target.style.backgroundImage = `url('${url}')`;
+      entry.target.style.backgroundAttachment = "fixed";
+      entry.target.classList.add("bg-loaded");
+    } else {
+      // Móvil: inserta <img> para mejorar rendimiento en Chromium
+      const img = new Image();
+      img.className = "bg-img";
+      img.alt = "";
+      img.decoding = "async";
+      img.loading = "lazy";
+      img.src = url;
+
+      // Fade-in al terminar de cargar
+      const show = () => entry.target.classList.add("bg-loaded");
+      if (img.decode) { img.decode().then(show).catch(() => img.onload = show); }
+      else { img.onload = show; }
+
+      entry.target.appendChild(img);
+      entry.target.style.backgroundAttachment = "scroll";
+    }
+
+    observer.unobserve(entry.target);
+  });
+}, { rootMargin: "300px 0px", threshold: 0.1 });
+
+secciones.forEach(sec => observer.observe(sec));
+
         });
     </script>
 </body>
 </html>
+
 
 
 
