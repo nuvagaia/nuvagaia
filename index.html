@@ -74,13 +74,6 @@
   opacity: 1;
 }
 
-@media (max-width: 768px) {
-  .contact-and-footer-wrapper {
-    background-attachment: scroll;
-    background-image: url('img/TransicionSectionBG-M.webp');
-  }
-}
-
         h1 { font-size: clamp(3rem, 10vw, 7rem); font-weight: 600; text-transform: uppercase; line-height: 1; margin-bottom: 20px;}
         h2 { font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 600; margin-bottom: 40px; text-transform: uppercase; }
         h3 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 600; margin-bottom: 15px; }
@@ -455,13 +448,28 @@
             animation: text-glow-cycle 10s infinite alternate;
             padding: 0 15px;
         }
+        /* Base sin imagen para evitar descargas dobles */
         .contact-and-footer-wrapper {
             background-color: #0c142c;
-            background-image: url('img/TransicionSectionBG.webp');
             background-size: cover;
             background-position: center center;
-            background-attachment: fixed;
             overflow: hidden;
+        }
+        
+        /* Desktop (≥ 769px): imagen grande + fixed */
+        @media (min-width: 769px) {
+          .contact-and-footer-wrapper {
+            background-image: url('img/TransicionSectionBG.webp');
+            background-attachment: fixed;
+          }
+        }
+        
+        /* Móvil (≤ 768px): imagen vertical -M + scroll */
+        @media (max-width: 768px) {
+          .contact-and-footer-wrapper {
+            background-image: url('img/TransicionSectionBG-M.webp');
+            background-attachment: scroll;
+          }
         }
         #suscripcion {
             background-color: transparent;
@@ -1222,6 +1230,7 @@
     </script>
 </body>
 </html>
+
 
 
 
