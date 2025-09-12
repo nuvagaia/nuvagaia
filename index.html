@@ -1181,41 +1181,48 @@
                 });
             });
             
-                // Lazy loading de fondos (desktop vs móvil)
-    const secciones = document.querySelectorAll(".seccion-fondo");
-
+    // Lazy loading de fondos (robusto con fallbacks y sin /undefined)
+    const secciones = document.querySelectorAll(".seccion-fondo[data-bg-desktop]");
+    
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const isMobile = window.innerWidth <= 768;
-          const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+        if (!entry.isIntersecting) return;
     
-          const bg = isMobile
-            ? (isPortrait && entry.target.dataset.bgPortrait
-                  ? entry.target.dataset.bgPortrait
-                  : entry.target.dataset.bgMobile)
-            : entry.target.dataset.bgDesktop;
+        const ds = entry.target.dataset;
+        const isMobile = window.innerWidth <= 768;
+        const isPortrait = window.matchMedia('(orientation: portrait)').matches;
     
-          entry.target.style.backgroundImage = `url(${bg})`;
-          entry.target.classList.add("bg-loaded");
-    
-          if (!isMobile) {
-            entry.target.style.backgroundAttachment = "fixed";
-          } else {
-            entry.target.style.backgroundAttachment = "scroll";
-          }
-    
-          observer.unobserve(entry.target);
+        // Elegir la mejor imagen disponible, con fallbacks
+        let bg = null;
+        if (!isMobile) {
+          // Desktop: desktop > mobile > portrait
+          bg = ds.bgDesktop || ds.bgMobile || ds.bgPortrait;
+        } else {
+          // Móvil: portrait si está en vertical, si no mobile; si faltan, cae a desktop
+          bg = (isPortrait ? ds.bgPortrait : ds.bgMobile) || ds.bgMobile || ds.bgDesktop;
         }
+    
+        if (!bg) {
+          console.warn('[NUVAGAIA] Falta data-bg-* en:', entry.target.id || entry.target.className);
+          observer.unobserve(entry.target);
+          return; // evita pedir /undefined
+        }
+    
+        entry.target.style.backgroundImage = `url('${bg}')`;
+        entry.target.classList.add("bg-loaded");
+    
+        entry.target.style.backgroundAttachment = isMobile ? "scroll" : "fixed";
+    
+        observer.unobserve(entry.target);
       });
     }, { rootMargin: "300px 0px", threshold: 0.1 });
-
-
+    
     secciones.forEach(sec => observer.observe(sec));
         });
     </script>
 </body>
 </html>
+
 
 
 
