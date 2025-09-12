@@ -77,6 +77,7 @@
 @media (max-width: 768px) {
   .contact-and-footer-wrapper {
     background-attachment: scroll;
+    background-image: url('img/TransicionSectionBG-M.webp');
   }
 }
 
@@ -795,7 +796,8 @@
     <main>
 <section id="hero" class="seccion-fondo hero"
          data-bg-desktop="img/HeroBG.webp"
-         data-bg-mobile="img/HeroBG-1080.webp">
+         data-bg-mobile="img/HeroBG-1080.webp"
+         data-bg-portrait="img/HeroBG-M.webp">
     <div class="container contenido-hero">
         <h1 class="fade-in-up">NUVAGAIA</h1>
         <p id="subtitulo-hero" class="fade-in-up">EL VIEJO MUNDO SE QUEBRÓ, DE LAS CENIZAS EMERGIERON TRES CIVILIZACIONES...</p>
@@ -808,7 +810,8 @@
 
 <section id="Solarpunk" class="seccion-fondo solarpunk seccion-civilizacion"
          data-bg-desktop="img/SolarpunkSectionBG.webp"
-         data-bg-mobile="img/SolarpunkSectionBG-1080.webp">
+         data-bg-mobile="img/SolarpunkSectionBG-1080.webp"
+         data-bg-portrait="img/SolarpunkSectionBG-M.webp">
     <div class="container fade-in-up">
         <div class="tarjeta-civ">
             <img src="img/Solarpunk.webp" alt="Arte Solarpunk: Ciudades Vivas">
@@ -826,7 +829,8 @@
 
 <section id="Hydropunk" class="seccion-fondo hydropunk seccion-civilizacion"
          data-bg-desktop="img/HydropunkSectionBG.webp"
-         data-bg-mobile="img/HydropunkSectionBG-1080.webp">
+         data-bg-mobile="img/HydropunkSectionBG-1080.webp"
+         data-bg-portrait="img/HydropunkSectionBG-M.webp">
     <div class="container fade-in-up">
         <div class="tarjeta-civ">
             <img src="img/Hydropunk.webp" alt="Arte Hydropunk: Ciudades Flotantes">
@@ -844,7 +848,8 @@
 
 <section id="Nanopunk" class="seccion-fondo nanopunk seccion-civilizacion"
          data-bg-desktop="img/NanopunkSectionBG.webp"
-         data-bg-mobile="img/NanopunkSectionBG-1080.webp">
+         data-bg-mobile="img/NanopunkSectionBG-1080.webp"
+         data-bg-portrait="img/NanopunkSectionBG-M.webp">
     <div class="container fade-in-up">
         <div class="tarjeta-civ">
             <img src="img/Nanopunk.webp" alt="Arte Nanopunk: Abismos de Neón y Silicio">
@@ -862,7 +867,8 @@
 
 <section id="intersticial-1" class="texto-intersticial seccion-fondo"
          data-bg-desktop="img/TransicionSectionBG.webp"
-         data-bg-mobile="img/TransicionSectionBG-1080.webp">
+         data-bg-mobile="img/TransicionSectionBG-1080.webp"
+         data-bg-portrait="img/TransicionSectionBG-M.webp">
     <div class="container">
         <p class="fade-in-up">COEXISTIERON, HASTA QUE LA REALIDAD MISMA SE RASGÓ CON LA APARICIÓN DE LOS...</p>
     </div>
@@ -870,7 +876,8 @@
 
 <section id="Tejedores-de-Estrellas" class="seccion-fondo tejedores seccion-civilizacion"
          data-bg-desktop="img/TejedoresSectionBG.webp"
-         data-bg-mobile="img/TejedoresSectionBG-1080.webp">
+         data-bg-mobile="img/TejedoresSectionBG-1080.webp"
+         data-bg-portrait="img/TejedoresSectionBG-M.webp">
     <div class="container fade-in-up">
         <div class="tarjeta-civ">
             <img src="img/Tejedores.webp" alt="Arte Tejedores de Estrellas: Entidades Cósmicas">
@@ -888,7 +895,8 @@
 
 <section id="intersticial-2" class="texto-intersticial seccion-fondo"
          data-bg-desktop="img/TransicionSectionBG.webp"
-         data-bg-mobile="img/TransicionSectionBG-1080.webp">
+         data-bg-mobile="img/TransicionSectionBG-1080.webp"
+         data-bg-portrait="img/TransicionSectionBG-M.webp">
     <div class="container">
         <p class="fade-in-up">EL MUNDO ESTÁ EN MEDIO DE SU RENACIMIENTO, O DE UN CAMBIO DEFINITIVO</p>
     </div>
@@ -1180,29 +1188,35 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const isMobile = window.innerWidth <= 768;
-          const bg = isMobile 
-            ? entry.target.dataset.bgMobile 
+          const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+    
+          const bg = isMobile
+            ? (isPortrait && entry.target.dataset.bgPortrait
+                  ? entry.target.dataset.bgPortrait
+                  : entry.target.dataset.bgMobile)
             : entry.target.dataset.bgDesktop;
-
+    
           entry.target.style.backgroundImage = `url(${bg})`;
           entry.target.classList.add("bg-loaded");
-
+    
           if (!isMobile) {
             entry.target.style.backgroundAttachment = "fixed";
           } else {
             entry.target.style.backgroundAttachment = "scroll";
           }
-
+    
           observer.unobserve(entry.target);
         }
       });
     }, { rootMargin: "300px 0px", threshold: 0.1 });
+
 
     secciones.forEach(sec => observer.observe(sec));
         });
     </script>
 </body>
 </html>
+
 
 
 
