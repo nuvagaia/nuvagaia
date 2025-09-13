@@ -818,36 +818,29 @@
             .hero p { font-size: 1.5rem; }
             .tarjeta-civ { max-width: 380px; }
         }
-        /* ===== OPTIMIZACIÓN INVISIBLE PARA MÓVILES ===== */
-        @media (max-width: 768px) {
-          /* Evitar scroll pesado con fondos */
-          .seccion-fondo {
-            background-attachment: scroll !important; /* nada de fixed en móvil */
-          }
-              
-          /* Quitar blur de tarjetas e intersticiales */
-          .tarjeta-civ,
-          .texto-intersticial {
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important; /* para Safari iOS */
-            background-color: rgba(12, 20, 44, 0.8) !important; /* compensar con un fondo más opaco */
-          }
-        
-          /* Asegura fluidez en animaciones y scroll */
-          .tarjeta-civ,
-          .seccion-fondo {
-            will-change: transform, opacity;
-            transform: translateZ(0);
-          }
+            /* ===== OPTIMIZACIÓN INVISIBLE PARA MÓVILES ===== */
+            @media (max-width: 768px) {
+              .seccion-fondo { background-attachment: scroll !important; }
+            
+              .tarjeta-civ,
+              .texto-intersticial {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background-color: rgba(12, 20, 44, 0.8) !important;
+              }
+            
+              .tarjeta-civ,
+              .seccion-fondo {
+                will-change: transform, opacity;
+                transform: translateZ(0);
+              }
+            }
+            
             /* === Parallax (fixed) garantizado en desktop y tablet ancha === */
-        @media (min-width: 769px) {
-          .seccion-fondo {
-            background-attachment: fixed;
-          }
-          /* Si por cualquier motivo existe un <img class="bg-img">, lo ocultamos en desktop */
-          .seccion-fondo .bg-img {
-            display: none !important;
-          }
+            @media (min-width: 769px) {
+              .seccion-fondo { background-attachment: fixed; }
+              .seccion-fondo .bg-img { display: none !important; }
+            }
         }
     </style>
 </head>
@@ -884,7 +877,8 @@
 <section id="hero" class="seccion-fondo hero"
          data-bg-desktop="img/HeroBG.webp"
          data-bg-mobile="img/HeroBG-1080.webp"
-         data-bg-portrait="img/HeroBG-M.webp">
+         data-bg-portrait="img/HeroBG-M.webp"
+         data-parallax="80">
     <div class="container contenido-hero">
         <h1 class="fade-in-up">NUVAGAIA</h1>
         <p id="subtitulo-hero" class="fade-in-up">EL VIEJO MUNDO SE QUEBRÓ, DE LAS CENIZAS EMERGIERON TRES CIVILIZACIONES...</p>
@@ -898,7 +892,8 @@
 <section id="Solarpunk" class="seccion-fondo solarpunk seccion-civilizacion"
          data-bg-desktop="img/SolarpunkSectionBG.webp"
          data-bg-mobile="img/SolarpunkSectionBG-1080.webp"
-         data-bg-portrait="img/SolarpunkSectionBG-M.webp">
+         data-bg-portrait="img/SolarpunkSectionBG-M.webp"
+         data-parallax="60">
     <div class="container fade-in-up">
         <div class="tarjeta-civ">
             <img src="img/Solarpunk.webp" alt="Arte Solarpunk: Ciudades Vivas">
@@ -917,7 +912,8 @@
 <section id="Hydropunk" class="seccion-fondo hydropunk seccion-civilizacion"
          data-bg-desktop="img/HydropunkSectionBG.webp"
          data-bg-mobile="img/HydropunkSectionBG-1080.webp"
-         data-bg-portrait="img/HydropunkSectionBG-M.webp">
+         data-bg-portrait="img/HydropunkSectionBG-M.webp"
+         data-parallax="60">
     <div class="container fade-in-up">
         <div class="tarjeta-civ">
             <img src="img/Hydropunk.webp" alt="Arte Hydropunk: Ciudades Flotantes">
@@ -936,7 +932,8 @@
 <section id="Nanopunk" class="seccion-fondo nanopunk seccion-civilizacion"
          data-bg-desktop="img/NanopunkSectionBG.webp"
          data-bg-mobile="img/NanopunkSectionBG-1080.webp"
-         data-bg-portrait="img/NanopunkSectionBG-M.webp">
+         data-bg-portrait="img/NanopunkSectionBG-M.webp"
+         data-parallax="60">
     <div class="container fade-in-up">
         <div class="tarjeta-civ">
             <img src="img/Nanopunk.webp" alt="Arte Nanopunk: Abismos de Neón y Silicio">
@@ -955,7 +952,8 @@
 <section id="intersticial-1" class="texto-intersticial seccion-fondo"
          data-bg-desktop="img/TransicionSectionBG.webp"
          data-bg-mobile="img/TransicionSectionBG-1080.webp"
-         data-bg-portrait="img/TransicionSectionBG-M.webp">
+         data-bg-portrait="img/TransicionSectionBG-M.webp"
+         data-parallax="90">
     <div class="container">
         <p class="fade-in-up">COEXISTIERON, HASTA QUE LA REALIDAD MISMA SE RASGÓ CON LA APARICIÓN DE LOS...</p>
     </div>
@@ -964,7 +962,8 @@
 <section id="Tejedores-de-Estrellas" class="seccion-fondo tejedores seccion-civilizacion"
          data-bg-desktop="img/TejedoresSectionBG.webp"
          data-bg-mobile="img/TejedoresSectionBG-1080.webp"
-         data-bg-portrait="img/TejedoresSectionBG-M.webp">
+         data-bg-portrait="img/TejedoresSectionBG-M.webp"
+         data-parallax="60">
     <div class="container fade-in-up">
         <div class="tarjeta-civ">
             <img src="img/Tejedores.webp" alt="Arte Tejedores de Estrellas: Entidades Cósmicas">
@@ -983,7 +982,8 @@
 <section id="intersticial-2" class="texto-intersticial seccion-fondo"
          data-bg-desktop="img/TransicionSectionBG.webp"
          data-bg-mobile="img/TransicionSectionBG-1080.webp"
-         data-bg-portrait="img/TransicionSectionBG-M.webp">
+         data-bg-portrait="img/TransicionSectionBG-M.webp"
+         data-parallax="90">
     <div class="container">
         <p class="fade-in-up">EL MUNDO ESTÁ EN MEDIO DE SU RENACIMIENTO, O DE UN CAMBIO DEFINITIVO</p>
     </div>
@@ -1342,7 +1342,7 @@ function initMobileParallax() {
       const progress = clamp((center - secCenter) / rect.height, -1, 1);
 
       // Intensidad del efecto (px). Personalizable por sección con data-parallax="60"
-      const amplitude = parseFloat(sec.dataset.parallax || '40'); // 40px por defecto
+      const amplitude = parseFloat(sec.dataset.parallax || '80'); // 80px por defecto
 
       const translateY = progress * amplitude; // mueve hacia arriba/abajo
       img.style.transform = `translate3d(0, ${translateY}px, 0)`;
@@ -1374,6 +1374,7 @@ initMobileParallax();
     </script>
 </body>
 </html>
+
 
 
 
