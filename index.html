@@ -826,6 +826,15 @@
             will-change: transform, opacity;
             transform: translateZ(0);
           }
+            /* === Parallax (fixed) garantizado en desktop y tablet ancha === */
+        @media (min-width: 769px) {
+          .seccion-fondo {
+            background-attachment: fixed;
+          }
+          /* Si por cualquier motivo existe un <img class="bg-img">, lo ocultamos en desktop */
+          .seccion-fondo .bg-img {
+            display: none !important;
+          }
         }
     </style>
 </head>
@@ -1299,6 +1308,7 @@ secciones.forEach(sec => observer.observe(sec));
     </script>
 </body>
 </html>
+
 
 
 
