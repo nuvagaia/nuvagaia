@@ -812,9 +812,9 @@
             background-attachment: scroll !important; /* nada de fixed en móvil */
           }
         
-          /* Sombras más ligeras (pero visualmente similares) */
+           /* Quitar sombras en tarjetas */
           .tarjeta-civ {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+            box-shadow: none !important;
           }
         
           /* Blur más barato para GPU (1px en lugar de 2px, casi imperceptible) */
@@ -1302,6 +1302,7 @@ secciones.forEach(sec => observer.observe(sec));
     </script>
 </body>
 </html>
+
 
 
 
