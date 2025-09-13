@@ -817,10 +817,12 @@
             box-shadow: none !important;
           }
         
-          /* Blur más barato para GPU (1px en lugar de 2px, casi imperceptible) */
+          /* Quitar blur de tarjetas e intersticiales */
           .tarjeta-civ,
           .texto-intersticial {
-            backdrop-filter: blur(1px) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important; /* para Safari iOS */
+            background-color: rgba(12, 20, 44, 0.95) !important; /* compensar con un fondo más opaco */
           }
         
           /* Asegura fluidez en animaciones y scroll */
@@ -1302,6 +1304,7 @@ secciones.forEach(sec => observer.observe(sec));
     </script>
 </body>
 </html>
+
 
 
 
