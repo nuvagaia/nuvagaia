@@ -811,18 +811,13 @@
           .seccion-fondo {
             background-attachment: scroll !important; /* nada de fixed en móvil */
           }
-        
-           /* Quitar sombras en tarjetas */
-          .tarjeta-civ {
-            box-shadow: none !important;
-          }
-        
+              
           /* Quitar blur de tarjetas e intersticiales */
           .tarjeta-civ,
           .texto-intersticial {
             backdrop-filter: none !important;
             -webkit-backdrop-filter: none !important; /* para Safari iOS */
-            background-color: rgba(12, 20, 44, 0.95) !important; /* compensar con un fondo más opaco */
+            background-color: rgba(12, 20, 44, 0.85) !important; /* compensar con un fondo más opaco */
           }
         
           /* Asegura fluidez en animaciones y scroll */
@@ -1304,6 +1299,7 @@ secciones.forEach(sec => observer.observe(sec));
     </script>
 </body>
 </html>
+
 
 
 
