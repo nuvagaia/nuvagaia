@@ -805,6 +805,31 @@
             .hero p { font-size: 1.5rem; }
             .tarjeta-civ { max-width: 380px; }
         }
+        /* ===== OPTIMIZACIÓN INVISIBLE PARA MÓVILES ===== */
+        @media (max-width: 768px) {
+          /* Evitar scroll pesado con fondos */
+          .seccion-fondo {
+            background-attachment: scroll !important; /* nada de fixed en móvil */
+          }
+        
+          /* Sombras más ligeras (pero visualmente similares) */
+          .tarjeta-civ {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+          }
+        
+          /* Blur más barato para GPU (1px en lugar de 2px, casi imperceptible) */
+          .tarjeta-civ,
+          .texto-intersticial {
+            backdrop-filter: blur(1px) !important;
+          }
+        
+          /* Asegura fluidez en animaciones y scroll */
+          .tarjeta-civ,
+          .seccion-fondo {
+            will-change: transform, opacity;
+            transform: translateZ(0);
+          }
+        }
     </style>
 </head>
 <body>
@@ -1277,6 +1302,7 @@ secciones.forEach(sec => observer.observe(sec));
     </script>
 </body>
 </html>
+
 
 
 
