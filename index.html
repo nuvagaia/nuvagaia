@@ -862,27 +862,29 @@
               left: 20px;
               z-index: 1000;
             
-              background: transparent;                /* sin fondo */
+              background: rgba(12, 20, 44, 0.7);      /* igual que botón hamburguesa */
               border: 2px solid #ffffff;              /* borde blanco */
               border-radius: 50%;
             
               width: 45px;
               height: 45px;
-              font-size: 20px;
-              color: #ffffff;                         /* icono en blanco */
+              font-size: 18px;
+              color: #ffffff;                         /* icono blanco */
               cursor: pointer;
             
               display: flex;
               align-items: center;
               justify-content: center;
             
+              backdrop-filter: blur(4px);
               transition: background 0.3s, transform 0.2s;
             }
             
             .music-btn:hover {
-              background: rgba(255, 255, 255, 0.15);  /* fondo blanco semitransparente al hover */
+              background: rgba(12, 20, 44, 0.9);      /* un poco más oscuro en hover */
               transform: scale(1.1);
             }
+
         }
     </style>
 </head>
@@ -904,7 +906,10 @@
       Tu navegador no soporta audio HTML5.
     </audio>
     
-    <button id="music-toggle" class="music-btn" aria-label="Reproducir música">🎵</button>
+    <button id="music-toggle" class="music-btn" aria-label="Reproducir música">
+      <i class="fas fa-music"></i>
+    </button>
+
 
     <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú de navegación">
         <i class="fas fa-bars"></i>
@@ -1424,12 +1429,15 @@ initMobileParallax();
         let playing = false;
         
         toggleMusic.addEventListener('click', () => {
+          const icon = toggleMusic.querySelector('i');
           if (!playing) {
             music.play().catch(err => console.warn('Autoplay bloqueado:', err));
-            toggleMusic.textContent = '⏸️'; // pausa en blanco
+            icon.classList.remove('fa-music');
+            icon.classList.add('fa-pause');
           } else {
             music.pause();
-            toggleMusic.textContent = '🎵'; // nota en blanco
+            icon.classList.remove('fa-pause');
+            icon.classList.add('fa-music');
           }
           playing = !playing;
         });
@@ -1437,6 +1445,7 @@ initMobileParallax();
     </script>
 </body>
 </html>
+
 
 
 
