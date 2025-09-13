@@ -64,6 +64,19 @@
 
     will-change: background-image, opacity;
 }
+        /* Parallax móvil: prepara la <img> para moverse con la GPU */
+@media (max-width: 768px) {
+  .seccion-fondo .bg-img {
+    will-change: transform;
+    transform: translate3d(0,0,0); /* capa propia en GPU */
+  }
+}
+
+/* Respeto a accesibilidad: si el usuario prefiere menos movimiento, no movemos nada */
+@media (prefers-reduced-motion: reduce) {
+  .seccion-fondo .bg-img { transform: none !important; }
+}
+
 
 /* Fade solo en las secciones con fondo lazy */
 .seccion-fondo[data-bg-desktop] {
@@ -1303,11 +1316,65 @@ const observer = new IntersectionObserver((entries) => {
 }, { rootMargin: "300px 0px", threshold: 0.1 });
 
 secciones.forEach(sec => observer.observe(sec));
+            /* === Parallax suave en móviles (usa la <img class="bg-img">) === */
+function initMobileParallax() {
+  if (window.innerWidth > 768) return; // solo móvil
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Todas las secciones que podrían tener fondo móvil (<img class="bg-img">)
+  const sections = Array.from(document.querySelectorAll('.seccion-fondo'));
+
+  let ticking = false;
+
+  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+  function update() {
+    const vh = window.innerHeight;
+    const center = window.scrollY + vh / 2;
+
+    for (const sec of sections) {
+      const img = sec.querySelector('.bg-img');
+      if (!img) continue; // aún no cargada: lazy loader no la insertó
+
+      const rect = sec.getBoundingClientRect();
+      const secTop = window.scrollY + rect.top;
+      const secCenter = secTop + rect.height / 2;
+      const progress = clamp((center - secCenter) / rect.height, -1, 1);
+
+      // Intensidad del efecto (px). Personalizable por sección con data-parallax="60"
+      const amplitude = parseFloat(sec.dataset.parallax || '40'); // 40px por defecto
+
+      const translateY = progress * amplitude; // mueve hacia arriba/abajo
+      img.style.transform = `translate3d(0, ${translateY}px, 0)`;
+    }
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  window.addEventListener('orientationchange', onScroll);
+
+  // Primer cálculo
+  onScroll();
+}
+
+// Llama a la función después del lazy loader:
+initMobileParallax();
+
 
         });
     </script>
 </body>
 </html>
+
 
 
 
