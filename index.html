@@ -855,29 +855,32 @@
               .seccion-fondo { background-attachment: fixed; }
               .seccion-fondo .bg-img { display: none !important; }
             }
-        /* Botón de música fijo arriba a la izquierda */
+            /* Botón de música fijo arriba a la izquierda */
             .music-btn {
               position: fixed;
               top: 20px;
               left: 20px;
               z-index: 1000;
-              background: rgba(12, 20, 44, 0.7);
-              border: 2px solid var(--color-primario);
+            
+              background: transparent;                /* sin fondo */
+              border: 2px solid #ffffff;              /* borde blanco */
               border-radius: 50%;
+            
               width: 45px;
               height: 45px;
               font-size: 20px;
-              color: var(--color-primario);
+              color: #ffffff;                         /* icono en blanco */
               cursor: pointer;
+            
               display: flex;
               align-items: center;
               justify-content: center;
-              backdrop-filter: blur(4px);
+            
               transition: background 0.3s, transform 0.2s;
             }
             
             .music-btn:hover {
-              background: rgba(12, 20, 44, 0.9);
+              background: rgba(255, 255, 255, 0.15);  /* fondo blanco semitransparente al hover */
               transform: scale(1.1);
             }
         }
@@ -1416,17 +1419,17 @@ function initMobileParallax() {
 initMobileParallax();
         });
 
-                const music = document.getElementById('bg-music');
+        const music = document.getElementById('bg-music');
         const toggleMusic = document.getElementById('music-toggle');
         let playing = false;
         
         toggleMusic.addEventListener('click', () => {
           if (!playing) {
             music.play().catch(err => console.warn('Autoplay bloqueado:', err));
-            toggleMusic.textContent = '⏸️'; // icono de pausa
+            toggleMusic.textContent = '⏸️'; // pausa en blanco
           } else {
             music.pause();
-            toggleMusic.textContent = '🎵'; // icono de nota
+            toggleMusic.textContent = '🎵'; // nota en blanco
           }
           playing = !playing;
         });
@@ -1434,6 +1437,7 @@ initMobileParallax();
     </script>
 </body>
 </html>
+
 
 
 
