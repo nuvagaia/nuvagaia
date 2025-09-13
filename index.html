@@ -855,6 +855,31 @@
               .seccion-fondo { background-attachment: fixed; }
               .seccion-fondo .bg-img { display: none !important; }
             }
+        /* Botón de música fijo arriba a la izquierda */
+            .music-btn {
+              position: fixed;
+              top: 20px;
+              left: 20px;
+              z-index: 1000;
+              background: rgba(12, 20, 44, 0.7);
+              border: 2px solid var(--color-primario);
+              border-radius: 50%;
+              width: 45px;
+              height: 45px;
+              font-size: 20px;
+              color: var(--color-primario);
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              backdrop-filter: blur(4px);
+              transition: background 0.3s, transform 0.2s;
+            }
+            
+            .music-btn:hover {
+              background: rgba(12, 20, 44, 0.9);
+              transform: scale(1.1);
+            }
         }
     </style>
 </head>
@@ -870,7 +895,14 @@
             <a href="#suscripcion" aria-label="Sección de suscripción">Únete</a>
         </nav>
     </header>
+    <!-- Control de música -->
+    <audio id="bg-music" loop>
+      <source src="audio/ambient.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio HTML5.
+    </audio>
     
+    <button id="music-toggle" class="music-btn" aria-label="Reproducir música">🎵</button>
+
     <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú de navegación">
         <i class="fas fa-bars"></i>
     </button>
@@ -1382,12 +1414,27 @@ function initMobileParallax() {
 
 // Llama a la función después del lazy loader:
 initMobileParallax();
-
-
         });
+
+                const music = document.getElementById('bg-music');
+        const toggleMusic = document.getElementById('music-toggle');
+        let playing = false;
+        
+        toggleMusic.addEventListener('click', () => {
+          if (!playing) {
+            music.play().catch(err => console.warn('Autoplay bloqueado:', err));
+            toggleMusic.textContent = '⏸️'; // icono de pausa
+          } else {
+            music.pause();
+            toggleMusic.textContent = '🎵'; // icono de nota
+          }
+          playing = !playing;
+        });
+
     </script>
 </body>
 </html>
+
 
 
 
