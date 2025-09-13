@@ -806,10 +806,11 @@
             .tarjeta-civ { max-width: 380px; }
         }
         /* ===== OPTIMIZACIÓN INVISIBLE PARA MÓVILES ===== */
-        /* @media (max-width: 768px) {
+        @media (max-width: 768px) {
+          /* Evitar scroll pesado con fondos */
           .seccion-fondo {
-            background-attachment: scroll !important;
-          } */
+            background-attachment: scroll !important; /* nada de fixed en móvil */
+          }
               
           /* Quitar blur de tarjetas e intersticiales */
           .tarjeta-civ,
@@ -1298,8 +1299,6 @@ secciones.forEach(sec => observer.observe(sec));
     </script>
 </body>
 </html>
-
-
 
 
 
