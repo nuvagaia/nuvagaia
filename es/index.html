@@ -884,8 +884,22 @@
               background: rgba(12, 20, 44, 0.9);      /* un poco más oscuro en hover */
               transform: scale(1.1);
             }
-
         }
+                    /* Interlineado más compacto SOLO en móvil para 3 títulos concretos (ES) */
+            @media (max-width: 767px){
+              /* "Únete al Mundo de NUVAGAIA" (sección de suscripción) */
+              #suscripcion h2{
+                line-height: 1.15;   /* ajusta 1.10–1.20 si quieres afinar */
+                margin-bottom: 18px; /* opcional */
+              }
+            
+              /* "EXPLORA NUVAGAIA" y "SIGUE LAS SEÑALES" */
+              .seccion-enlaces h2{
+                line-height: 1.1;    /* más cerrado */
+                margin-bottom: 18px; /* opcional */
+              }
+            }
+
     </style>
 </head>
 <body>
