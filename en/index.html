@@ -911,6 +911,20 @@
                 white-space: nowrap;
               }
             }
+            /* Interlineado más compacto SOLO en móvil para 3 títulos concretos */
+            @media (max-width: 767px){
+              /* "Únete al Mundo de NUVAGAIA" (título de la sección de suscripción) */
+              #suscripcion h2{
+                line-height: 1.15;   /* ajusta 1.10–1.20 si quieres afinar */
+                margin-bottom: 18px; /* opcional */
+              }
+            
+              /* "EXPLORE NUVAGAIA" y "FOLLOW THE SIGNALS" */
+              .seccion-enlaces h2{
+                line-height: 1.1;    /* más cerrado */
+                margin-bottom: 18px; /* opcional */
+              }
+            }
 
     </style>
 </head>
