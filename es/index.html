@@ -884,21 +884,21 @@
               background: rgba(12, 20, 44, 0.9);      /* un poco más oscuro en hover */
               transform: scale(1.1);
             }
+        /* Interlineado más compacto SOLO en móvil (ES) */
+        @media (max-width: 767px) {
+          /* “Únete al Mundo de NUVAGAIA” (sección suscripción) */
+          #suscripcion h2 {
+            line-height: 1.15 !important;
+            margin-bottom: 18px;
+          }
+        
+          /* “EXPLORA NUVAGAIA” y “SIGUE LAS SEÑALES” (footer) */
+          .seccion-enlaces h2 {
+            line-height: 1.1 !important;
+            margin-bottom: 18px;
+          }
         }
-                    /* Interlineado más compacto SOLO en móvil (ES) */
-            @media (max-width: 767px){
-              /* "Únete al mundo de NUVAGAIA" (sección suscripción) */
-              #suscripcion h2{
-                line-height: 1.15 !important;
-                margin-bottom: 18px;
-              }
-            
-              /* "Explora NUVAGAIA" y "Sigue las Señales" */
-              .seccion-enlaces h2{
-                line-height: 1.1 !important;
-                margin-bottom: 18px;
-              }
-            }
+
 
     </style>
 </head>
