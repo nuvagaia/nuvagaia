@@ -885,8 +885,33 @@
               background: rgba(12, 20, 44, 0.9);      /* un poco más oscuro en hover */
               transform: scale(1.1);
             }
+            /* --- MOBILE: todos los botones ocupan ancho completo --- */
+            @media (max-width: 767px){
+              .botones-enlaces a{
+                width: 100%;
+                min-width: 100%;
+                white-space: normal; /* por si en algún sitio pusiste nowrap */
+              }
+              /* Si usaste una clase específica o nth-child para el 1º botón,
+                 neutralizamos aquí cualquier min-width residual */
+              .botones-enlaces a.btn-wide,
+              .botones-enlaces a:nth-child(1){
+                min-width: 100%;
+              }
+            }
+            
+            /* --- DESKTOP: sólo el botón largo gana un poco de ancho --- */
+            @media (min-width: 1024px){
+              /* Usa la que corresponda a lo que hiciste:
+                 - si añadiste clase extra al botón: .btn-wide
+                 - si tocaste el 1º con nth-child: .nth-child(1) */
+              .botones-enlaces a.btn-wide,
+              .botones-enlaces a:nth-child(1){
+                min-width: 340px;   /* ajusta 330–380px si hace falta */
+                white-space: nowrap;
+              }
+            }
 
-        }
     </style>
 </head>
 <body>
