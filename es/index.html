@@ -912,7 +912,7 @@
           text-decoration: none;
           margin: 0 .25rem;
         }
-        .lang-switcher a:hover{ opacity: 1; text-decoration: underline; }
+        .lang-switcher a:hover{ opacity: 1; text-decoration: none; }
         
         /* --- DESKTOP (a la derecha del header) --- */
         .navegacion-principal{ position: relative; } /* referencia para el absolute */
@@ -938,9 +938,10 @@
           }
           /* Si quieres estilo de “píldoras” para los idiomas dentro del overlay: */
           #mobile-menu-overlay .lang-switcher--mobile a{
-            padding: 10px 12px;
+            padding: 6px 10px;
             border: 1px solid #fff;
-            border-radius: 10px;
+            border-radius: 8px;
+            font-size:.95rem;   
           }
         }
 
@@ -961,8 +962,11 @@
         
         <!-- Selector de idioma (SOLO desktop) -->
         <nav class="lang-switcher lang-switcher--desktop" aria-label="Language">
-          <a href="#" data-lang="es">ES</a> · <a href="#" data-lang="en">EN</a>
+          <a href="#" data-lang="es">ES</a>
+          <span class="lang-sep" aria-hidden="true">|</span>
+          <a href="#" data-lang="en">EN</a>
         </nav>
+
         
     </header>
     <!-- Control de música -->
@@ -992,8 +996,11 @@
             
             <!-- Selector de idioma (SOLO móvil, dentro del overlay) -->
             <div class="lang-switcher lang-switcher--mobile" aria-label="Language">
-              <a href="#" data-lang="es">ES</a> · <a href="#" data-lang="en">EN</a>
+              <a href="#" data-lang="es">ES</a>
+              <span class="lang-sep" aria-hidden="true">|</span>
+              <a href="#" data-lang="en">EN</a>
             </div>
+
 
         </nav>
     </div>
