@@ -904,6 +904,12 @@
           }
         }
 
+        .lang-switcher{position:absolute;left:14px;top:10px;font-weight:600}
+        .lang-switcher a{color:#fff;opacity:.85;text-decoration:none;margin:0 .25rem}
+        .lang-switcher a:hover{opacity:1;text-decoration:underline}
+        @media (max-width: 767px){ .lang-switcher{top:16px} }
+            }
+        }
 
     </style>
 </head>
@@ -918,6 +924,11 @@
             <a href="#Tejedores-de-Estrellas" aria-label="Sección Tejedores de Estrellas">Tejedores de Estrellas</a>
             <a href="#suscripcion" aria-label="Sección de suscripción">Únete</a>
         </nav>
+        
+        <nav class="lang-switcher" aria-label="Language">
+          <a href="#" data-lang="es">ES</a> · <a href="#" data-lang="en">EN</a>
+        </nav>
+        
     </header>
     <!-- Control de música -->
     <audio id="bg-music" loop>
@@ -1461,6 +1472,19 @@ initMobileParallax();
             });
         }
 
+    <script>
+    (function(){
+      const links = document.querySelectorAll('.lang-switcher a');
+      links.forEach(a=>{
+        a.addEventListener('click',e=>{
+          e.preventDefault();
+          const target = a.dataset.lang;            // 'es' o 'en'
+          try{ localStorage.setItem('lang', target);}catch(_){}
+          const path = location.pathname.replace(/^\/(en|es)\//,'/'); // conserva la ruta
+          location.assign('/'+target+path+location.hash);
+        });
+      });
+    })();
     </script>
 </body>
 </html>
