@@ -904,10 +904,46 @@
           }
         }
 
-        .lang-switcher{position:absolute;left:14px;top:10px;font-weight:600}
-        .lang-switcher a{color:#fff;opacity:.85;text-decoration:none;margin:0 .25rem}
-        .lang-switcher a:hover{opacity:1;text-decoration:underline}
-        @media (max-width: 767px){ .lang-switcher{top:16px} }
+        /* Base del selector */
+        .lang-switcher{ font-weight: 600; z-index: 5; }
+        .lang-switcher a{
+          color: #fff;
+          opacity: .85;
+          text-decoration: none;
+          margin: 0 .25rem;
+        }
+        .lang-switcher a:hover{ opacity: 1; text-decoration: underline; }
+        
+        /* --- DESKTOP (a la derecha del header) --- */
+        .navegacion-principal{ position: relative; } /* referencia para el absolute */
+        .lang-switcher--desktop{
+          position: absolute;
+          right: 16px;   /* ajústalo si lo quieres más pegado al borde */
+          top: 12px;
+          display: flex;
+          gap: .25rem;
+        }
+        @media (max-width: 767px){
+          .lang-switcher--desktop{ display: none; }   /* se oculta en móvil */
+        }
+        
+        /* --- MÓVIL (dentro del overlay del menú) --- */
+        .lang-switcher--mobile{ display: none; }       /* oculto en desktop */
+        @media (max-width: 767px){
+          .lang-switcher--mobile{
+            display: flex;
+            justify-content: center;
+            gap: .5rem;
+            margin: 16px 0 8px;
+          }
+          /* Si quieres estilo de “píldoras” para los idiomas dentro del overlay: */
+          #mobile-menu-overlay .lang-switcher--mobile a{
+            padding: 10px 12px;
+            border: 1px solid #fff;
+            border-radius: 10px;
+          }
+        }
+
         
     </style>
 </head>
@@ -923,7 +959,8 @@
             <a href="#suscripcion" aria-label="Sección de suscripción">Únete</a>
         </nav>
         
-        <nav class="lang-switcher" aria-label="Language">
+        <!-- Selector de idioma (SOLO desktop) -->
+        <nav class="lang-switcher lang-switcher--desktop" aria-label="Language">
           <a href="#" data-lang="es">ES</a> · <a href="#" data-lang="en">EN</a>
         </nav>
         
@@ -952,6 +989,12 @@
             <a href="#Nanopunk" onclick="cerrarMenuMovil();">Nanocodax</a>
             <a href="#Tejedores-de-Estrellas" onclick="cerrarMenuMovil();">Tejedores de Estrellas</a>
             <a href="#suscripcion" onclick="cerrarMenuMovil();">Únete</a>
+            
+            <!-- Selector de idioma (SOLO móvil, dentro del overlay) -->
+            <div class="lang-switcher lang-switcher--mobile" aria-label="Language">
+              <a href="#" data-lang="es">ES</a> · <a href="#" data-lang="en">EN</a>
+            </div>
+
         </nav>
     </div>
 
