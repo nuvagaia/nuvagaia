@@ -1359,26 +1359,42 @@
             const detailedContext = `Eres un cronista experto del universo de ciencia ficción 'NUVAGAIA'. Usa estrictamente la siguiente información canónica para escribir un fragmento de lore (entre 60 y 110 palabras) sobre la civilización '${displayCivName}'.\n\n--- Base de Conocimiento Canónico ---\n${JSON.stringify(loreInfo, null, 2)}\n--- Fin de la Base de Conocimiento ---\n\nEl fragmento de lore debe ser evocador y sentirse como parte de una historia más grande. No saludes ni te despidas, solo escribe el fragmento de lore.`;
             
             try {
-                const payload = { contents: [{ role: "user", parts: [{ text: detailedContext }] }] };
-                const apiKey = "AIzaSyBAcfKbm-kanQU__xuIH9SOGqaz0xuPwAU"; // API Key will be injected by the environment
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-                
-                const response = await fetch(apiUrl, {
+                const response = await fetch('https://nuvagaia-gemini-lore-958680623896.europe-west1.run.app', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prompt: detailedContext
+                    })
                 });
-                
-                if (!response.ok) { throw new Error(`API Error: ${response.status} ${response.statusText}`); }
-                
-                const result = await response.json();
-                let generatedText = "No se pudo obtener una respuesta válida. Inténtalo de nuevo.";
-                if (result.candidates && result.candidates[0]?.content?.parts?.[0]?.text) {
-                    generatedText = result.candidates[0].content.parts[0].text;
-                } else {
-                    console.warn("Unexpected response structure:", result);
+        
+                if (!response.ok) {
+                    const errorText = await response.text().catch(() => '');
+                    console.error('Error desde el backend:', response.status, errorText);
+                    if (dom.loreResultado) {
+                        dom.loreResultado.innerText =
+                            'Ha ocurrido un error al contactar con el cronista de NUVAGAIA. Inténtalo de nuevo en unos minutos.';
+                    }
+                    return;
                 }
-                if(dom.loreResultado) dom.loreResultado.innerText = generatedText;
+        
+                const data = await response.json();
+                const loreText = data.text || data.output || '';
+        
+                if (!loreText) {
+                    console.error('Respuesta vacía desde el backend:', data);
+                    if (dom.loreResultado) {
+                        dom.loreResultado.innerText =
+                            'El cronista se ha quedado en silencio. Vuelve a intentarlo dentro de un momento.';
+                    }
+                    return;
+                }
+        
+                if (dom.loreResultado) {
+                    dom.loreResultado.innerText = loreText;
+                }
+
             } catch (error) {
                 console.error("Error generating lore:", error);
                 if(dom.loreResultado) dom.loreResultado.innerText = "Error en la transmisión. No se pudo conectar con la red de NUVAGAIA. Por favor, inténtalo más tarde.";
