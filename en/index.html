@@ -1430,10 +1430,6 @@
                     dom.loreResultado.innerText =
                         'Transmission error. We could not connect to the NUVAGAIA network. Please try again later.';
                 }
-
-            } catch (error) {
-                console.error("Error generating lore:", error);
-                if(dom.loreResultado) dom.loreResultado.innerText = "Transmission error. Could not connect to the NUVAGAIA network. Please try again later.";
             }
         }
 
