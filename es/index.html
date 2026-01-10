@@ -1194,7 +1194,7 @@
                             <a href="https://www.tiktok.com/@nuvagaia" target="_blank" aria-label="tiktok"><i class="fab fa-tiktok"></i></a>
                         </div>
                     </div>
-                    <p><small>&copy; 2025 NUVAGAIA. Todos los derechos reservados.</small></p>
+                    <p><small>&copy; 2026 NUVAGAIA. Todos los derechos reservados.</small></p>
                     <p><small>NUVAGAIA&trade; es una marca comercial de Gerard Bisbal Brucart.</small></p>
                 </div>
             </footer>
@@ -1357,7 +1357,7 @@
                 'Nanopunk': 'Nanocodax'
             };
             const displayCivName = displayNameMap[civName] || civName; // Get new name, or default to original if not in map
-            const detailedContext = `Eres un cronista experto del universo de ciencia ficción 'NUVAGAIA'. Usa estrictamente la siguiente información canónica para escribir un fragmento de lore (entre 60 y 110 palabras) sobre la civilización '${displayCivName}'.\n\n--- Base de Conocimiento Canónico ---\n${JSON.stringify(loreInfo, null, 2)}\n--- Fin de la Base de Conocimiento ---\n\nEl fragmento de lore debe ser evocador y sentirse como parte de una historia más grande. No saludes ni te despidas, solo escribe el fragmento de lore.`;
+            const detailedContext = `Eres un cronista experto del universo de ciencia ficción 'NUVAGAIA'. Usa estrictamente la siguiente información canónica para escribir un fragmento de lore (entre 50 y 80 palabras) sobre la civilización '${displayCivName}'.\n\n--- Base de Conocimiento Canónico ---\n${JSON.stringify(loreInfo, null, 2)}\n--- Fin de la Base de Conocimiento ---\n\nEl fragmento de lore debe ser evocador y sentirse como parte de una historia más grande. No saludes ni te despidas, solo escribe el fragmento de lore.`;
             
             try {
                 const response = await fetch('https://nuvagaia-gemini-lore-958680623896.europe-west1.run.app', {
